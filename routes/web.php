@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\Auth\SocialController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -69,6 +71,8 @@ Route::match(['GET', 'POST'], '/pay/{id}', function($id) {
     return (new PaymentController)->redirectToGateway($id);
 })->name('pay');
 
+// Route::match(['GET', 'POST'], '/pay/{id}', [PaymentController::class, 'redirectToGateway'])->name('pay');
+
 Route::get('/dashboard', function () {
     return view('dashboard'); 
 })->middleware('auth')->name('dashboard');
@@ -80,3 +84,6 @@ Route::get('orders/{order}/track', function($order) {
 Route::get('orders/{order}/status', function($order) {
     return "Status of order: " . $order;
 })->name('orders.status');
+
+Route::get('login/google', [SocialController::class, 'redirectToGoogle']);
+Route::get('login/google/callback', [SocialController::class, 'handleGoogleCallback']);

@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^12.0",
+        "laravel/socialite": "^5.24",
         "laravel/tinker": "^2.10.1"
     },
     "require-dev": {
@@ -79,6 +80,9 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "audit": {
+            "block-insecure": false
         }
     },
     "minimum-stability": "stable",

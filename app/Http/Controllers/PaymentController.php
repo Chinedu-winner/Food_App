@@ -19,6 +19,9 @@ class PaymentController extends Controller{
     } 
 
     public function redirectToGateway($id){
-        return "Processing payment for meal ID: " . $id;
+        $meal = Meal::findOrFail($id);
+        $user = Auth::user(); 
+        return view('payment', compact('meal', 'user'));
+        // return "Processing payment for meal ID: " . $id;
     }
 }

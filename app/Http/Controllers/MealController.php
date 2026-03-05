@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class MealController extends Controller{
     public function index(){
-        $meal
+        $meals = Meal::all();
+        return view('meal', compact('meals'));
     }
 }

@@ -28,9 +28,7 @@
 
   <div class="container mx-auto max-w-6xl px-5 py-16 md:py-20">
     <h1 class="text-center text-5xl md:text-6xl font-bold text-bistro-title mb-3">FoodWin</h1>
-    <p class="text-center text-bistro-subtitle text-lg md:text-xl mb-10">
-      Fresh Ingredients • Bold Flavors • Made with Love
-    </p>
+    <p class="text-center text-bistro-subtitle text-lg md:text-xl mb-10"> Fresh Ingredients • Bold Flavors • Made with Love </p>
 
     <!-- Header Nigerian food platter -->
     <div class="mb-12">
@@ -55,7 +53,7 @@
               <span class="text-2xl font-bold text-bistro-price">$8.99</span>
               <div class="text-xl text-bistro-star">
                 ★★★★★ <span class="text-gray-400 text-lg">4.8</span>
-                <form action="{{route ('pay', ['id' => $meal->id])}}" method="GET">
+                <form action="{{route ('pay', ['id' => 1])}}" method="GET">
                   @csrf
                   <button type="submit" class="ml-4 px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
                 </form>
@@ -74,7 +72,11 @@
             <div class="flex items-center justify-between">
               <span class="text-2xl font-bold text-bistro-price">$11.99</span>
               <div class="text-xl text-bistro-star">
-                ★★★★☆ <span class="text-gray-400 text-lg">4.6</span>
+                ★★★★☆ <span class="text-gray-400 text-lg">4.6</span>   
+                <form action="{{route ('pay', ['id' => 2])}}" method="GET">
+                  @csrf
+                  <button type="submit" class="ml-4 px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
+                </form>
               </div>
             </div>
           </div>
@@ -88,7 +90,11 @@
             <div class="flex items-center justify-between">
               <span class="text-2xl font-bold text-bistro-price">$7.90</span>
               <div class="text-xl text-bistro-star">
-                ★★★★☆ <span class="text-gray-400 text-lg">4.4</span>
+                ★★★★☆ <span class="text-gray-400 text-lg">4.4</span>  
+                <form action="{{route ('pay', ['id' => 3])}}" method="GET">
+                  @csrf
+                  <button type="submit" class="ml-4 px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
+                </form>
               </div>
             </div>
           </div>
@@ -112,26 +118,28 @@
               <span class="text-2xl font-bold text-bistro-price">$16.90</span>
               <div class="text-xl text-bistro-star">
                 ★★★★★ <span class="text-gray-400 text-lg">4.9</span>
+                  <form action="{{route ('pay', ['id' => 4])}}" method="GET">
+                  @csrf
+                  <button type="submit" class="ml-4 px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
+                </form>
               </div>
             </div>
           </div>
         </div>
 
         <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-          <img 
-            src="https://iheartvegetables.com/wp-content/uploads/2023/12/Exclusive-Cashew-Tofu-and-Vegetable-Stir-Fry-4364-Large.jpeg" 
-            alt="Grilled salmon with vegetables" 
-            class="w-full h-48 object-cover"
-          >
+          <img src="https://iheartvegetables.com/wp-content/uploads/2023/12/Exclusive-Cashew-Tofu-and-Vegetable-Stir-Fry-4364-Large.jpeg" alt="Grilled salmon with vegetables" class="w-full h-48 object-cover">
           <div class="p-6">
             <h3 class="text-2xl font-semibold text-gray-800 mb-2">Grilled Salmon</h3>
-            <p class="text-gray-600 mb-6 min-h-[3rem]">
-              Atlantic salmon, lemon-herb butter, roasted vegetables, quinoa
-            </p>
+            <p class="text-gray-600 mb-6 min-h-[3rem]">Atlantic salmon, lemon-herb butter, roasted vegetables, quinoa</p>
             <div class="flex items-center justify-between">
               <span class="text-2xl font-bold text-bistro-price">$22.99</span>
               <div class="text-xl text-bistro-star">
                 ★★★★★ <span class="text-gray-400 text-lg">4.8</span>
+                  <form action="{{route ('pay', ['id' => 5])}}" method="GET">
+                  @csrf
+                  <button type="submit" class="ml-4 px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
+                </form>
               </div>
             </div>
           </div>
@@ -152,6 +160,10 @@
               <span class="text-2xl font-bold text-bistro-price">$17.50</span>
               <div class="text-xl text-bistro-star">
                 ★★★★½ <span class="text-gray-400 text-lg">4.7</span>
+                  <form action="{{route ('pay', ['id' => 6])}}" method="GET">
+                  @csrf
+                  <button type="submit" class="ml-4 px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
+                </form>
               </div>
             </div>
           </div>
@@ -172,6 +184,10 @@
               <span class="text-2xl font-bold text-bistro-price">$14.90</span>
               <div class="text-xl text-bistro-star">
                 ★★★★☆ <span class="text-gray-400 text-lg">4.5</span>
+                   <form action="{{route ('pay', ['id' => 7])}}" method="GET">
+                  @csrf
+                  <button type="submit" class="ml-4 px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
+                </form>
               </div>
             </div>
           </div>
@@ -202,6 +218,10 @@
               <span class="text-2xl font-bold text-bistro-price">$18.50</span>
               <div class="text-xl text-bistro-star">
                 ★★★★★ <span class="text-gray-400 text-lg">4.9</span>
+                   <form action="{{route ('pay', ['id' => 8])}}" method="GET">
+                  @csrf
+                  <button type="submit" class="ml-4 px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
+                </form>
               </div>
             </div>
           </div>
@@ -218,6 +238,10 @@
               <span class="text-2xl font-bold text-bistro-price">$19.99</span>
               <div class="text-xl text-bistro-star">
                 ★★★★★ <span class="text-gray-400 text-lg">4.8</span>
+                  <form action="{{route ('pay', ['id' => 9])}}" method="GET">
+                  @csrf
+                  <button type="submit" class="ml-4 px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
+                </form>
               </div>
             </div>
           </div>
@@ -233,7 +257,11 @@
             <div class="flex items-center justify-between">
               <span class="text-2xl font-bold text-bistro-price">$15.90</span>
               <div class="text-xl text-bistro-star">
-                ★★★★½ <span class="text-gray-400 text-lg">4.7</span>
+                ★★★★½ <span class="text-gray-400 text-lg">4.7</span> 
+                  <form action="{{route ('pay', ['id' => 10])}}" method="GET">
+                  @csrf
+                  <button type="submit" class="ml-4 px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
+                </form>
               </div>
             </div>
           </div>
@@ -254,6 +282,10 @@
               <span class="text-2xl font-bold text-bistro-price">$17.50</span>
               <div class="text-xl text-bistro-star">
                 ★★★★☆ <span class="text-gray-400 text-lg">4.6</span>
+                  <form action="{{route ('pay', ['id' => 11])}}" method="GET">
+                  @csrf
+                  <button type="submit" class="ml-4 px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
+                </form>
               </div>
             </div>
           </div>
@@ -274,7 +306,11 @@
             <div class="flex items-center justify-between">
               <span class="text-2xl font-bold text-bistro-price">$5.50</span>
               <div class="text-xl text-bistro-star">
-                ★★★★★ <span class="text-gray-400 text-lg">4.9</span>
+                ★★★★★ <span class="text-gray-400 text-lg">4.9</span>  
+                <form action="{{route ('pay', ['id' => 12])}}" method="GET">
+                  @csrf
+                  <button type="submit" class="ml-4 px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
+                </form>
               </div>
             </div>
           </div>
@@ -287,7 +323,12 @@
             <p class="text-gray-600 mb-6 min-h-[3rem]">Bitterleaf soup thickened with cocoyam & flavored with traditional spices </p>
             <div class="flex items-center justify-between">
               <span class="text-2xl font-bold text-bistro-price">$20.20</span>
-              <div class="text-xl text-bistro-star">★★★★½ <span class="text-gray-400 text-lg">4.6</span></div>
+              <div class="text-xl text-bistro-star">★★★★½ <span class="text-gray-400 text-lg">4.6</span>
+              <form action="{{route ('pay', ['id' => 13])}}" method="GET">
+                  @csrf
+                  <button type="submit" class="ml-4 px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
