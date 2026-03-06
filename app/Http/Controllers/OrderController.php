@@ -27,4 +27,5 @@ class OrderController extends Controller{
             'updated_at' => $order->updated_at,
         ]);
     }
+    
 }

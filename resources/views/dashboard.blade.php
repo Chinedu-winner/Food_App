@@ -9,20 +9,19 @@
 </head>
 <body class="flex bg-gray-100 font-sans min-h-screen">
 
-<!-- Sidebar -->
 <div class="w-60 h-screen bg-white p-6 shadow-lg flex flex-col">
   <h2 class="text-2xl font-bold text-teal-500 mb-8">FoodWin</h2>
   <ul class="space-y-3 flex-1">
     <li class="px-4 py-2 rounded-lg bg-teal-500 text-white flex items-center gap-2 cursor-pointer">
       <span>🏠</span> Dashboard</li>
+      <li class="px-4 py-2 rounded-lg text-gray-600 hover:bg-teal-500 hover:text-white flex items-center gap-2 cursor-pointer">
+        <span>👥</span> Admin page
+      </li>
     <li class="px-4 py-2 rounded-lg text-gray-600 hover:bg-teal-500 hover:text-white flex items-center gap-2 cursor-pointer">
       <a href="{{ route('order') }}" class="flex items-center gap-2"><span>🛒</span> Orders</a></li>
-    <li class="px-4 py-2 rounded-lg text-gray-600 hover:bg-teal-500 hover:text-white flex items-center gap-2 cursor-pointer">
-      <span>👥</span> Customers
-    </li>
-    <li class="px-4 py-2 rounded-lg text-gray-600 hover:bg-teal-500 hover:text-white flex items-center gap-2 cursor-pointer">
-      <a href="{{ route('track') }}" class="flex items-center gap-2"><span>✉️</span> Track</a>
-    </li>
+      <li class="px-4 py-2 rounded-lg text-gray-600 hover:bg-teal-500 hover:text-white flex items-center gap-2 cursor-pointer">
+        <a href="{{ route('track') }}" class="flex items-center gap-2"><span>✉️</span> Track</a>
+      </li>
     <li class="px-4 py-2 rounded-lg text-gray-600 hover:bg-teal-500 hover:text-white flex items-center gap-2 cursor-pointer">
       <span>📊</span> Analytics
     </li>
