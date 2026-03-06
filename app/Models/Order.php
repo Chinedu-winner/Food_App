@@ -24,9 +24,15 @@ class Order extends Model{
         'user_id',
         'total',
         'status',
-        'notes',
+        'notes',    
         'latitude',
         'longitude',
+        'name',
+        'food_name',
+        'quantity',
+        'price',
+        'address',
+        'phone',
     ];
 
     protected $casts = [

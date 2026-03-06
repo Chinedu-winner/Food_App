@@ -16,16 +16,15 @@
     <li class="px-4 py-2 rounded-lg bg-teal-500 text-white flex items-center gap-2 cursor-pointer">
       <span>🏠</span> Dashboard</li>
     <li class="px-4 py-2 rounded-lg text-gray-600 hover:bg-teal-500 hover:text-white flex items-center gap-2 cursor-pointer">
-      <span>🛒</span> Orders
-    </li>
+      <a href="{{ route('order') }}" class="flex items-center gap-2"><span>🛒</span> Orders</a></li>
     <li class="px-4 py-2 rounded-lg text-gray-600 hover:bg-teal-500 hover:text-white flex items-center gap-2 cursor-pointer">
       <span>👥</span> Customers
     </li>
     <li class="px-4 py-2 rounded-lg text-gray-600 hover:bg-teal-500 hover:text-white flex items-center gap-2 cursor-pointer">
-      <span>📊</span> Analytics
+      <a href="{{ route('track') }}" class="flex items-center gap-2"><span>✉️</span> Track</a>
     </li>
     <li class="px-4 py-2 rounded-lg text-gray-600 hover:bg-teal-500 hover:text-white flex items-center gap-2 cursor-pointer">
-      <span>✉️</span> Messages
+      <span>📊</span> Analytics
     </li>
     <li class="px-4 py-2 rounded-lg text-gray-600 hover:bg-teal-500 hover:text-white flex items-center gap-2 cursor-pointer">
       <span>⚙️</span> Settings

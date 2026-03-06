@@ -24,7 +24,5 @@ catch(Exception $e){
         Auth::login($user, true);
         return redirect('/home');
         }
-    }
-
-    
+    }   
 }
