@@ -85,5 +85,8 @@ Route::get('orders/{order}/status', function($order) {
     return "Status of order: " . $order;
 })->name('orders.status');
 
-Route::get('login/google', [SocialController::class, 'redirectToGoogle']);
-Route::get('login/google/callback', [SocialController::class, 'handleGoogleCallback']);
+Route::get('login/google', [SocialController::class, 'redirectToGoogle'])
+    ->name('login.google');
+
+Route::get('login/google/callback', [SocialController::class, 'handleGoogleCallback'])
+    ->name('login.google.callback');

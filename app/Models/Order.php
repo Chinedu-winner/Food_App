@@ -25,7 +25,6 @@ class Order extends Model{
         'total',
         'status',
         'notes',
-        // gps coordinates updated by driver
         'latitude',
         'longitude',
     ];

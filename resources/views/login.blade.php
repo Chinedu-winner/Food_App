@@ -44,6 +44,7 @@
 
     <p class="mt-6 text-center text-gray-600 text-sm">Don't have an account? 
     <a href="{{ route('register') }}" class="text-teal-500 hover:text-teal-600 font-medium">Register</a>
+    <a href="{{ url('login/google') }}" class="bg-red-500 text-white py-2 px-4 rounded">Sign in with Google</a>
     </p>
 </div>
 
