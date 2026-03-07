@@ -126,5 +126,3 @@ Route::get('login/google', [SocialController::class, 'redirectToGoogle'])
 
 Route::get('login/google/callback', [SocialController::class, 'handleGoogleCallback'])
     ->name('login.google.callback');
-
-    //
