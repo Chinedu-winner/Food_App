@@ -27,5 +27,15 @@ class OrderController extends Controller{
             'updated_at' => $order->updated_at,
         ]);
     }
-    
+    public function store(Request $request){
+        $request->validate([
+            'total' => 'required|numeric',
+        ]);
+        $order = Order::create([
+            'user_id' => Auth::id(),
+            'total' => $request->input('total'),
+            'status' => 'pending',
+        ]);
+        return redirect()->route('orders.track', $order->id);
+    }
 }

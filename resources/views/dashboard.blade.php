@@ -7,88 +7,121 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <title>Food App Dashboard</title>
 </head>
-<body class="flex bg-gray-100 font-sans min-h-screen">
+<body class="flex bg-gradient-to-br from-orange-100 via-red-50 to-yellow-100 font-sans min-h-screen" style="background-image: linear-gradient(135deg, #fef3c7 0%, #fed7aa 25%, #fecaca 50%, #fef3c7 75%, #fed7aa 100%), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920&h=1080&fit=crop&auto=format'); background-size: cover, cover; background-blend-mode: overlay;">
 
-<div class="w-60 h-screen bg-white p-6 shadow-lg flex flex-col">
-  <h2 class="text-2xl font-bold text-teal-500 mb-8">FoodWin</h2>
+<div class="w-60 h-screen bg-gradient-to-b from-purple-800 via-blue-900 to-indigo-900 p-6 shadow-xl flex flex-col">
+  <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-lg p-4 mb-8">
+    <h2 class="text-2xl font-bold text-white text-center">🍽️ FoodWin</h2>
+  </div>
   <ul class="space-y-3 flex-1">
-    <li class="px-4 py-2 rounded-lg bg-teal-500 text-white flex items-center gap-2 cursor-pointer">
-      <span>🏠</span> Dashboard</li>
-      <li class="px-4 py-2 rounded-lg text-gray-600 hover:bg-teal-500 hover:text-white flex items-center gap-2 cursor-pointer">
+    <!-- <li class="px-4 py-2 rounded-lg bg-teal-500 text-white flex items-center gap-2 cursor-pointer">
+      <span>🏠</span> Dashboard</li> -->
+      <li class="px-4 py-2 rounded-lg text-white hover:bg-white hover:bg-opacity-20 hover:text-white flex items-center gap-2 cursor-pointer transition-all duration-200">
         <span>👥</span> Admin page
       </li>
-    <li class="px-4 py-2 rounded-lg text-gray-600 hover:bg-teal-500 hover:text-white flex items-center gap-2 cursor-pointer">
-      <a href="{{ route('order') }}" class="flex items-center gap-2"><span>🛒</span> Orders</a></li>
-      <li class="px-4 py-2 rounded-lg text-gray-600 hover:bg-teal-500 hover:text-white flex items-center gap-2 cursor-pointer">
-        <a href="{{ route('track') }}" class="flex items-center gap-2"><span>✉️</span> Track</a>
+    <li class="px-4 py-2 rounded-lg text-white hover:bg-white hover:bg-opacity-20 hover:text-white flex items-center gap-2 cursor-pointer transition-all duration-200">
+      <a href="{{ route('order') }}" class="flex items-center gap-2 text-white hover:text-white"><span>🛒</span> Orders</a></li>
+      <li class="px-4 py-2 rounded-lg text-white hover:bg-white hover:bg-opacity-20 hover:text-white flex items-center gap-2 cursor-pointer transition-all duration-200">
+        <a href="{{ route('track') }}" class="flex items-center gap-2 text-white hover:text-white"><span>✉️</span> Track</a>
       </li>
-    <li class="px-4 py-2 rounded-lg text-gray-600 hover:bg-teal-500 hover:text-white flex items-center gap-2 cursor-pointer">
+    <li class="px-4 py-2 rounded-lg text-white hover:bg-white hover:bg-opacity-20 hover:text-white flex items-center gap-2 cursor-pointer transition-all duration-200">
       <span>📊</span> Analytics
     </li>
-    <li class="px-4 py-2 rounded-lg text-gray-600 hover:bg-teal-500 hover:text-white flex items-center gap-2 cursor-pointer">
+    <li class="px-4 py-2 rounded-lg text-white hover:bg-white hover:bg-opacity-20 hover:text-white flex items-center gap-2 cursor-pointer transition-all duration-200">
       <span>⚙️</span> Settings
     </li>
   </ul>
-  <div class="text-sm text-gray-500 mt-auto">© 2026 Sedap</div>
+  <div class="text-sm text-white text-opacity-70 mt-auto">© FoodWin 2026</div>
 </div>
 
 <div class="flex-1 p-6">
 
+  <div class="bg-cover bg-center rounded-xl p-8 mb-8 text-white" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&h=400&fit=crop&auto=format')">
+    <h1 class="text-4xl font-bold mb-4">Welcome to FoodWin Dashboard</h1>
+    <p class="text-xl opacity-90">Manage your orders, track deliveries, and enjoy delicious food!</p>
+  </div>
+
   <div class="flex justify-between items-center mb-6">
-    <input type="text" placeholder="Search..." 
-      class="w-80 px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-400"/>
+    <input type="text" placeholder="Search for food, orders..." 
+      class="w-80 px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-400 bg-white shadow-md"/>
     <div class="flex items-center gap-4">
-      <button class="relative">       🔔
-        <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+      <button class="relative bg-white p-2 rounded-full shadow-md hover:shadow-lg transition-shadow">
+        🔔
+        <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
       </button>
-      <div class="flex items-center gap-2">
-        <img src="https://i.pravatar.cc/40" alt="avatar" class="w-8 h-8 rounded-full"/>
-        <span class="text-gray-700">Hello, {{ Auth::check() ? Auth::user()->name : 'Guest' }}</span>
+      <div class="flex items-center gap-2 bg-white p-2 rounded-full shadow-md">
+        <img src="https://i.pravatar.cc/40" alt="avatar" class="w-8 h-8 rounded-full border-2 border-teal-400"/>
+        <span class="text-gray-700 font-medium">Hello, {{ Auth::check() ? Auth::user()->name : 'Guest' }}</span>
       </div>
     </div>
   </div>
 
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-    <div class="bg-white p-5 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-      <h3 class="text-2xl font-bold mb-1">75</h3>
-      <span class="text-gray-500">Total Orders</span>
+    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-white bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=300&h=200&fit=crop&auto=format')">
+      <div class="bg-black bg-opacity-50 rounded-lg p-4">
+        <h3 class="text-3xl font-bold mb-2">75</h3>
+        <span class="text-lg opacity-90">📦 Total Orders</span>
+      </div>
     </div>
-    <div class="bg-white p-5 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-      <h3 class="text-2xl font-bold mb-1">$357</h3>
-      <span class="text-gray-500">Total Revenue</span>
+    <div class="bg-red-400 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-green-200 bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=200&fit=crop&auto=format')">
+      <div class="bg-black bg-opacity-50 rounded-lg p-4">
+        <h3 class="text-3xl font-bold mb-2">$357</h3>
+        <span class="text-lg opacity-90">💰 Total Revenue</span>
+      </div>
     </div>
-    <div class="bg-white p-5 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-      <h3 class="text-2xl font-bold mb-1">65</h3>
-      <span class="text-gray-500">Delivered</span>
+    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-white bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop&auto=format')">
+      <div class="bg-black bg-opacity-50 rounded-lg p-4">
+        <h3 class="text-3xl font-bold mb-2">65</h3>
+        <span class="text-lg opacity-90">✅ Delivered</span>
+      </div>
     </div>
-    <div class="bg-white p-5 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-      <h3 class="text-2xl font-bold mb-1">12</h3>
-      <span class="text-gray-500">Pending</span>
+    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-white bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1556909114-4c36e03d6b3e?w=300&h=200&fit=crop&auto=format')">
+      <div class="bg-black bg-opacity-50 rounded-lg p-4">
+        <h3 class="text-3xl font-bold mb-2">12</h3>
+        <span class="text-lg opacity-90">⏳ Pending</span>
+      </div>
     </div>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-    <div class="bg-white p-5 rounded-xl w-full h-64 mx-auto shadow-md">
-      <h4 class="font-medium mb-3 text-gray-700 text-center">Orders Distribution</h4>
-      <canvas id="chartupdate" class=""></canvas>
+    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+      <div class="flex items-center justify-center mb-4">
+        <div class="bg-gradient-to-r from-teal-400 to-teal-600 p-3 rounded-full mr-3">
+          📊
+        </div>
+        <h4 class="font-semibold text-gray-700 text-lg">Orders Distribution</h4>
+      </div>
+      <canvas id="chartupdate" class="w-full h-48"></canvas>
     </div>
-    <div class="bg-white p-5 rounded-xl  w-full h-64 mx-auto shadow-md">
-      <h4 class="font-medium mb-3 text-gray-700 text-center">Revenue Distribution</h4>
-      <canvas id="updatepie"></canvas>
+    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+      <div class="flex items-center justify-center mb-4">
+        <div class="bg-gradient-to-r from-orange-400 to-orange-600 p-3 rounded-full mr-3">
+          💰
+        </div>
+        <h4 class="font-semibold text-gray-700 text-lg">Revenue Distribution</h4>
+      </div>
+      <canvas id="updatepie" class="w-full h-48"></canvas>
     </div>
   </div>
 
-  <div class="bg-white p-5 rounded-xl shadow-md mb-8">
-    <h4 class="font-medium mb-3 text-gray-700 text-center">Weekly Orders Trend</h4>
-    <canvas id="chartlink"></canvas>
+  <div class="bg-white p-6 rounded-xl shadow-md mb-8">
+    <div class="flex items-center justify-center mb-6">
+      <div class="bg-gradient-to-r from-green-400 to-green-600 p-3 rounded-full mr-3">
+        📈
+      </div>
+      <h4 class="font-semibold text-gray-700 text-xl">Weekly Orders Trend</h4>
+    </div>
+    <canvas id="chartlink" class="w-full h-64"></canvas>
   </div>
-  <div>
-    <button>
-      <a href="{{ route('meal') }}" class="px-4 py-2 w-100 bg-red-500 text-white rounded hover:bg-red-600 transition">Order now </a>
+  <div class="bg-gradient-to-r from-red-400 to-red-600 rounded-xl p-8 text-white text-center shadow-lg hover:shadow-xl transition-shadow bg-cover bg-center" style="background-image: linear-gradient(rgba(239, 68, 68, 0.9), rgba(220, 38, 38, 0.9)), url('https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=800&h=200&fit=crop&auto=format')">
+    <h3 class="text-2xl font-bold mb-4">Hungry? Order Now!</h3>
+    <p class="text-lg mb-6 opacity-90">Get delicious food delivered to your doorstep</p>
+    <button class="bg-white text-red-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors shadow-md hover:shadow-lg transform hover:scale-105 transition-transform">
+      <a href="{{ route('meal') }}" class="block">🍕 Order Now</a>
     </button>
   </div>
 
-</div>
+</div> 
 
 <script>
 const chart1 = document.getElementById('chartupdate');

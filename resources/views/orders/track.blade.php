@@ -28,10 +28,10 @@
         <!-- Order Summary -->
         <div class="bg-white p-4 rounded-lg shadow mb-4">
             <h2 class="font-semibold mb-2">Order Summary</h2>
-            <p><strong>Customer:</strong> {{ $order->name }}</p>
-            <p><strong>Food:</strong> {{ $order->food_name }} (Qty: {{ $order->quantity }})</p>
-            <p><strong>Total Price:</strong> ${{ number_format($order->total, 2) }}</p>
-            <p><strong>Delivery Address:</strong> {{ $order->address }}</p>
+            <p><strong>Customer:</strong> {{ $order->name ?? 'N/A' }}</p>
+            <p><strong>Food:</strong> {{ $order->food_name ?? 'N/A' }} (Qty: {{ $order->quantity ?? 'N/A' }})</p>
+            <p><strong>Total Price:</strong> ${{ number_format($order->total ?? 0, 2) }}</p>
+            <p><strong>Delivery Address:</strong> {{ $order->address ?? 'N/A' }}</p>
         </div>
 
         <!-- Status Timeline -->
