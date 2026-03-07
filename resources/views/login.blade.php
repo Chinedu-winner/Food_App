@@ -21,12 +21,12 @@
     @csrf
     <div>
         <label for="email" class="block text-gray-700 font-medium mb-1">Email</label>
-        <input id="email" name="email" type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"value="{{ old('email') }}" required autofocus>
+        <input id="email" name="email" placeholder="email@gmail" type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"value="{{ old('email') }}" required autofocus>
     </div>
 
     <div>
         <label for="password" class="block text-gray-700 font-medium mb-1">Password</label>
-        <input id="password" name="password" type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"required>
+        <input id="password" name="password" placeholder="password" type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"required>
     </div>
 
     <div class="flex justify-between items-center text-sm text-gray-600">

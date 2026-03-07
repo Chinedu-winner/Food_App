@@ -29,14 +29,6 @@
     <input type="text" name="price" placeholder="Price" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400" required>
 </div>
 
-<div class="mb-4">
-    <input type="text" name="address" placeholder="Address" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400" required>
-</div>
-
-<div class="mb-4">
-    <input type="text" name="phone" placeholder="Phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400" required>
-</div>
-
 <button type="submit" class="w-full bg-teal-500 text-white py-2 rounded-lg hover:bg-teal-600">Order Now</button>
 
 </form>

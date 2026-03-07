@@ -18,7 +18,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->decimal('latitude', 10, 7)->nullable()->after('status');
+            $table->decimal('latitude', 10, 7)->nullable()->after('phone');
             $table->decimal('longitude', 10, 7)->nullable()->after('latitude');
         });
     }

@@ -30,8 +30,6 @@ Route::post('/order', function (Request $request) {
         'food_name' => 'required|string',
         'quantity' => 'required|integer|min:1',
         'price' => 'required|numeric|min:0',
-        'address' => 'required|string',
-        'phone' => 'required|string',
     ]);
 
     $order = Order::create([
@@ -41,8 +39,7 @@ Route::post('/order', function (Request $request) {
         'quantity' => $data['quantity'],
         'price' => $data['price'],
         'total' => $data['price'] * $data['quantity'],
-        'address' => $data['address'],
-        'phone' => $data['phone'],
+        'address' => Auth::user()->address,
         'status' => 'pending',
     ]);
 
@@ -129,3 +126,5 @@ Route::get('login/google', [SocialController::class, 'redirectToGoogle'])
 
 Route::get('login/google/callback', [SocialController::class, 'handleGoogleCallback'])
     ->name('login.google.callback');
+
+    //
