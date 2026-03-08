@@ -1,9 +1,8 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\PaymentController;
@@ -64,6 +63,11 @@ Route::post('/track', function (Request $request) {
     return redirect()->route('orders.track', ['order' => $order->id]);
 })->middleware('auth');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+});
+
 Route::post('/track', function (Request $request) {
     $request->validate(['order_id' => 'required|integer']);
 
@@ -74,9 +78,14 @@ Route::post('/track', function (Request $request) {
     if (!$order) {
         return back()->withErrors(['order_id' => 'Order not found or does not belong to you.']);
     }
-
     return redirect()->route('orders.track', ['order' => $order->id]);
 })->middleware('auth');
+
+Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard']);
+    Route::get('/orders', [AdminController::class, 'orders']);
+});
+
 Route::get('orders/{order}/status', function($order) {
     return "Status of order: " . $order;
 })->name('orders.status');

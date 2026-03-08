@@ -9,12 +9,8 @@ use Illuminate\Http\JsonResponse;
 
 class OrderController extends Controller{
     public function track(Order $order){
-        if (Auth::id() !== $order->user_id) {
-            abort(403, 'You are not allowed to view this order.');
-        }
         return view('orders.track', ['order' => $order]);
     }
-
     public function status(Order $order): JsonResponse{
         if (Auth::id() !== $order->user_id) {
             return response()->json(['error' => 'Forbidden'], 403);

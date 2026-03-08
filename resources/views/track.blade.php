@@ -13,7 +13,6 @@
         </div>
     @endif
 
-    <!-- Order Tracking Form -->
     <div class="bg-white p-6 rounded shadow mb-6 max-w-md">
         <form method="POST" action="{{ route('track') }}">
             @csrf
@@ -23,7 +22,6 @@
         </form>
     </div>
 
-    <!-- Map for order tracking -->
     @isset($order)
     <div id="map" class="w-full h-96 rounded shadow"></div>
     @endisset

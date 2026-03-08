@@ -18,36 +18,23 @@
         <nav class="space-y-4">
 
             <a href="#" class="block py-2 px-3 rounded hover:bg-gray-700">Dashboard</a>
-
             <a href="#" class="block py-2 px-3 rounded hover:bg-gray-700">User</a>
-
             <a href="#" class="block py-2 px-3 rounded hover:bg-gray-700">Restaurants</a>
-
             <a href="#" class="block py-2 px-3 rounded hover:bg-gray-700">Meals</a>
-
             <a href="#" class="block py-2 px-3 rounded hover:bg-gray-700">Orders</a>
-
             <a href="#" class="block py-2 px-3 rounded hover:bg-gray-700">Payments</a>
-
             <a href="#" class="block py-2 px-3 rounded hover:bg-red-600 mt-8">Logout</a>
-
         </nav>
 
     </aside>
 
-    <!-- Main Content -->
     <main class="flex-1 p-8">
 
-        <!-- Header -->
         <div class="flex justify-between items-center mb-8">
 
-            <h1 class="text-3xl font-bold">
-                Dashboard Overview
-            </h1>
+            <h1 class="text-3xl font-bold">Dashboard Overview</h1>
 
-            <div class="text-gray-600">
-                Welcome Admin
-            </div>
+            <div class="text-gray-600">Welcome Admin </div>
 
         </div>
 
