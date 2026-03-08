@@ -35,18 +35,15 @@
 </head>
 <body class="font-sans antialiased text-bistro-dark relative min-h-screen overflow-auto bg-bistro-bg">
 
-  <!-- Animated flashy background -->
   <div class="fixed inset-0 -z-10">
     <div class="w-full h-full bg-gradient-to-r from-pink-500 via-yellow-400 to-purple-500 bg-[length:200%_200%] animate-gradient-x"></div>
   </div>
 
   <div class="container mx-auto max-w-6xl px-5 py-16 md:py-20 relative z-10">
 
-    <!-- Page Header -->
     <h1 class="text-center text-5xl md:text-6xl font-extrabold text-bistro-title mb-3 drop-shadow-lg">FoodWin</h1>
     <p class="text-center text-bistro-subtitle text-lg md:text-xl mb-12">Fresh Ingredients • Bold Flavors • Made with Love</p>
 
-    <!-- Appetizers Section -->
     <section class="mb-20">
       <h2 class="text-4xl md:text-5xl font-semibold text-bistro-heading border-b-4 border-bistro-border pb-4 mb-10 inline-block">Appetizers</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -61,10 +58,12 @@
               <span class="text-2xl font-bold text-bistro-price">$8.99</span>
               <div class="text-xl text-bistro-star flex items-center">
                 ★★★★★ <span class="text-gray-400 text-lg ml-2">4.8</span>
-                <form action="{{route ('pay', ['id' => 1])}}" method="GET" class="ml-4">
-                  @csrf
-                  <button type="submit" class="px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
-                </form>
+       <form action="{{ route('pay', 1) }}" method="POST" class="ml-4">
+    @csrf
+    <button type="submit" class="px-3 py-1 bg-green-500 text-white rounded-lg">
+        Pay ₦8.99
+    </button>
+</form>
               </div>
             </div>
           </div>

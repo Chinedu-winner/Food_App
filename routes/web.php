@@ -139,6 +139,10 @@ Route::match(['GET', 'POST'], '/pay/{id}', function($id) {
     return (new PaymentController)->redirectToGateway($id);
 })->name('pay');
 
+Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
+
+Route::get('/payment/callback', [PaymentController::class, 'handleCallback'])->name('payment.callback');
+
 Route::get('/dashboard', function () {
     return view('dashboard'); 
 })->middleware('auth')->name('dashboard');

@@ -1,26 +1,48 @@
 <?php
+
 namespace App\Http\Controllers;
-use App\Models\Meal;
+
 use Illuminate\Http\Request;
+use Yabacon\Paystack;
+use App\Models\Order;
 
 class PaymentController extends Controller{
-    public function redirectToGetway($mealId){
-        $meal = Meal::findOrFail($mealId);
+    public function redirectToGateway(Request $request){
+        $mealId = $request->meal_id;
+        $meal = Meal::find($mealId);
+        $paystack = new Paystack(env('PAYSTACK_SECRET_KEY'));
 
-        if (!auth()->check()) {
-            return redirect('/login')->with('error', 'Please login to place an order');
+        try {
+            $response = $paystack->transaction->initialize([
+                'amount' => $meal->price * 100, 
+                'email' => auth()->user()->email,
+                'callback_url' => route('payment.callback')
+            ]);
+
+            return redirect($response->data->authorization_url);
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error initializing payment.');
         }
-        
-        return redirect('/meal')->with('success', 'Order placed successfully for ' . $meal->name . ' ($' . $meal->price . ')');
     }
 
-    public function handleCallback(){
-        return redirect('/meal')->with('success', 'Payment processed successfully');
-    } 
+    public function handleCallback(Request $request){
+        $reference = $request->query('reference');
+        $paystack = new Paystack(env('PAYSTACK_SECRET_KEY'));
 
-    public function redirectToGateway($id){
-        $meal = Meal::findOrFail($id);
-        $user = Auth::user(); 
-        return view('payment', compact('meal', 'user'));
+        $tranx = $paystack->transaction->verify([
+            'reference' => $reference,
+        ]);
+
+        if ($tranx->data->status === 'success') {
+            Order::create([
+                'customer_name' => auth()->user()->name,
+                'food_name' => session('meal_name'),
+                'quantity' => 1,
+                'price' => session('meal_price'),
+                'status' => 'paid',
+            ]);
+            return redirect('/meal')->with('success', 'Payment successful!');
+        }
+        return redirect('/meal')->with('error', 'Payment failed.');
     }
 }
