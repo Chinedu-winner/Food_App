@@ -7,8 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
     @yield('styles')
 </head>
-<body class="bg-gray-100 font-sans">
-
+<body class="min-h-screen bg-gradient-to-r from-orange-400 via-red-400 to-pink-500">
+    
     <nav class="bg-blue-600 text-white p-4">
         <div class="container mx-auto">
             <a href="{{ url('/') }}" class="font-bold text-lg">Food App</a>
