@@ -58,12 +58,9 @@
               <span class="text-2xl font-bold text-bistro-price">$8.99</span>
               <div class="text-xl text-bistro-star flex items-center">
                 ★★★★★ <span class="text-gray-400 text-lg ml-2">4.8</span>
-       <form action="{{ route('pay', 1) }}" method="POST" class="ml-4">
-    @csrf
-    <button type="submit" class="px-3 py-1 bg-green-500 text-white rounded-lg">
-        Pay ₦8.99
-    </button>
-</form>
+                    <form action="{{ route('pay', ['id' => 1]) }}" method="GET" class="ml-4">
+                  <button type="submit" class="px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Pay $8.99</button>
+                  </form>
               </div>
             </div>
           </div>

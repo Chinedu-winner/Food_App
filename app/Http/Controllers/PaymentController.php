@@ -1,7 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
-
+use App\Models\Meal; 
 use Illuminate\Http\Request;
 use Yabacon\Paystack;
 use App\Models\Order;
