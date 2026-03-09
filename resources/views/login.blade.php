@@ -42,16 +42,14 @@
         class="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 rounded-lg transition-colors duration-200">Sign In</button>
 
     </form>
- 
-<!-- Add spacing here -->
-<div class="mt-4 text-center">
-<a href="{{ url('login/google') }}" 
-    class="text-teal-500 hover:text-teal-600 font-medium inline-block">Sign in with Google </a>
-</div>
 
-<p class="mt-6 text-center text-gray-600 text-sm">Don't have an account? 
-    <a href="{{ route('register') }}" class="text-teal-500 hover:text-teal-600 font-medium">Register</a>
-</p>
+    <div class="mt-4 text-center">
+    <a href="{{ url('login/google') }}" class="text-teal-500 hover:text-teal-600 font-medium inline-block">Sign in with Google </a>
+    </div>
+    
+    <p class="mt-6 text-center text-gray-600 text-sm">Don't have an account? 
+        <a href="{{ route('register') }}" class="text-teal-500 hover:text-teal-600 font-medium">Register</a>
+    </p>
 
 </body>
 </html>

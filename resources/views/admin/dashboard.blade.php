@@ -108,3 +108,21 @@
 
 </body>
 </html>
+
+<script>
+let idleTime = 0;
+
+let idleInterval = setInterval(timerIncrement, 60000);
+
+document.onmousemove = document.onkeypress = function() {
+    idleTime = 0;
+};
+
+function timerIncrement() {
+    idleTime++;
+    if (idleTime > 5){
+        alert("You have been logged out due to inactivity.");
+        window.location.href = "{{ route('login') }}";
+    }
+}
+</script>
