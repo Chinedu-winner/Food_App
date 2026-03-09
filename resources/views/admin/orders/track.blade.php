@@ -12,8 +12,8 @@
         #map { height: 60vh; width: 100%; }
     </style>
 </head>
-<body class="bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 text-white flex flex-col items-center p-6 lg:p-8 min-h-screen">
-        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6">
+<body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex flex-col items-center p-6 lg:p-8 min-h-screen">
+    <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6">
         <nav class="flex items-center justify-end gap-4">
             <a href="{{ url('/') }}" class="text-[#1b1b18]">Home</a>
             @auth
@@ -34,6 +34,7 @@
             <p><strong>Delivery Address:</strong> {{ $order->address ?? 'N/A' }}</p>
         </div>
 
+        <!-- Status Timeline -->
         <div class="bg-white p-4 rounded-lg shadow mb-4">
             <h2 class="font-semibold mb-2">Order Status</h2>
             <div class="flex items-center justify-between mb-2">

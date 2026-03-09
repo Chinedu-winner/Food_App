@@ -6,7 +6,7 @@
 <title>Login - Food App</title>
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="min-h-screen flex items-center justify-center bg-gradient-to-r from-teal-400 via-blue-400 to-indigo-500 font-sans">
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-r from-white via-blue-400 to-indigo-500 font-sans">
 
 <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
     <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Sign in to your account</h2>
@@ -41,14 +41,17 @@
     <button type="submit" 
         class="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 rounded-lg transition-colors duration-200">Sign In</button>
 
-    <a href="/" class="block text-center mt-2 text-gray-500 hover:text-gray-700">Cancel</a>
     </form>
-
-    <p class="mt-6 text-center text-gray-600 text-sm">Don't have an account? 
-    <a href="{{ route('register') }}" class="text-teal-500 hover:text-teal-600 font-medium">Register</a>
-    <a href="{{ url('login/google') }}" class="bg-red-500 text-white py-2 px-4 rounded">Sign in with Google</a>
-    </p>
+ 
+<!-- Add spacing here -->
+<div class="mt-4 text-center">
+<a href="{{ url('login/google') }}" 
+    class="text-teal-500 hover:text-teal-600 font-medium inline-block">Sign in with Google </a>
 </div>
+
+<p class="mt-6 text-center text-gray-600 text-sm">Don't have an account? 
+    <a href="{{ route('register') }}" class="text-teal-500 hover:text-teal-600 font-medium">Register</a>
+</p>
 
 </body>
 </html>
