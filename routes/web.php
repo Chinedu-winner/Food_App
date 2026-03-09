@@ -26,7 +26,7 @@ Route::get('login/google/callback', [SocialController::class, 'handleGoogleCallb
 
 // Protected routes
 Route::middleware('auth')->group(function () {
-
+    
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Orders
@@ -39,8 +39,9 @@ Route::middleware('auth')->group(function () {
 
     // Payment
     Route::match(['GET', 'POST'], '/pay/{id}', [PaymentController::class, 'redirectToGateway'])->name('pay');
-    Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay.post');
-    Route::get('/payment/callback', [PaymentController::class, 'handleCallback'])->name('payment.callback');
+
+Route::get('/pay/{id}', [PaymentController::class, 'redirectToGateway'])->name('pay');
+Route::get('/payment/callback', [PaymentController::class, 'handleCallback'])->name('payment.callback');
 });
 
 // Admin routes
