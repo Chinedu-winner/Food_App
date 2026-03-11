@@ -16,7 +16,8 @@
   <ul class="space-y-3 flex-1">
     <!-- <li class="px-4 py-2 rounded-lg bg-teal-500 text-white flex items-center gap-2 cursor-pointer">
       <span>🏠</span> Dashboard</li> -->
-      <li class="px-4 py-2 rounded-lg text-white hover:bg-white hover:bg-opacity-20 hover:text-white flex items-center gap-2 cursor-pointer transition-all duration-200"><span>👥</span> Admin pageev</li>
+      <li class="px-4 py-2 rounded-lg text-white hover:bg-white hover:bg-opacity-20 hover:text-white flex items-center gap-2 cursor-pointer transition-all duration-200">
+        <a href="{{route('admin.login')}}" class="flex items-center gap-2 text-white hover:text-white"><span>👥</span> Admin page</a></li>
     <li class="px-4 py-2 rounded-lg text-white hover:bg-white hover:bg-opacity-20 hover:text-white flex items-center gap-2 cursor-pointer transition-all duration-200">
       <a href="{{ route('order') }}" class="flex items-center gap-2 text-white hover:text-white"><span>🛒</span> Orders</a></li>
       <li class="px-4 py-2 rounded-lg text-white hover:bg-white hover:bg-opacity-20 hover:text-white flex items-center gap-2 cursor-pointer transition-all duration-200">

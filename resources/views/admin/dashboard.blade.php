@@ -41,10 +41,12 @@
         <!-- Stats Cards -->
         <div class="grid grid-cols-4 gap-6 mb-10">
 
-            <div class="bg-white p-6 rounded shadow">
-                <h3 class="text-gray-500">Total Users</h3>
-                <p class="text-2xl font-bold">120</p>
-            </div>
+        <h2>Admin Access Log</h2>
+                <ul>
+                @foreach($uniqueUsers as $user)
+                    <li>{{ $user->name }} - {{ $user->email }}</li>
+                @endforeach
+                </ul>
 
             <div class="bg-white p-6 rounded shadow">
                 <h3 class="text-gray-500">Total Orders</h3>

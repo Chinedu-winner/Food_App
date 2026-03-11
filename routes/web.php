@@ -30,7 +30,7 @@ Route::post('/order', function (Request $request) {
         'food_name' => 'required|string',
         'quantity' => 'required|integer|min:1',
         'price' => 'required|numeric|min:0',
-    ]);
+    ]); 
 
     $order = Order::create([
         'user_id' => Auth::id(),
@@ -77,6 +77,12 @@ Route::post('/track', function (Request $request) {
 
     return redirect()->route('orders.track', ['order' => $order->id]);
 })->middleware('auth');
+
+
+Route::get('/admin/dashboard', [AdminAuthController::class, 'dashboard'])
+    ->middleware('auth') 
+    ->name('admin.dashboard');
+
 Route::get('orders/{order}/status', function($order) {
     return "Status of order: " . $order;
 })->name('orders.status');
@@ -134,6 +140,13 @@ Route::get('/dashboard', function () {
     return view('dashboard'); 
 })->middleware('auth')->name('dashboard');
 
+
+Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])
+    ->name('admin.login');
+
+Route::post('/admin/login', [AdminAuthController::class, 'login'])
+    ->name('admin.login.submit');
+
 Route::get('login/google', [SocialController::class, 'redirectToGoogle'])
     ->name('login.google');
 
@@ -145,7 +158,3 @@ Route::get('/admin/login', [AdminAuthController::class,'showLogin'])
 
 Route::post('/admin/login', [AdminAuthController::class,'login'])
     ->name('admin.login.submit');
-
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware('auth')->name('admin.dashboard');
