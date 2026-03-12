@@ -80,7 +80,7 @@ Route::post('/track', function (Request $request) {
 
 
 Route::get('/admin/dashboard', [AdminAuthController::class, 'dashboard'])
-    ->middleware(['auth', 'admin']) 
+    // ->middleware(['auth', 'admin']) 
     ->name('admin.dashboard');
 
 Route::get('orders/{order}/status', function($order) { 
@@ -140,21 +140,14 @@ Route::get('/dashboard', function () {
     return view('dashboard'); 
 })->middleware('auth')->name('dashboard');
 
-
-Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])
-    ->name('admin.login');
-
-Route::post('/admin/login', [AdminAuthController::class, 'login'])
-    ->name('admin.login.submit');
+Route::prefix('admin')->group(function() {
+    Route::get('login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
+    Route::post('login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
+    Route::get('dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
+});
 
 Route::get('login/google', [SocialController::class, 'redirectToGoogle'])
     ->name('login.google');
 
 Route::get('login/google/callback', [SocialController::class, 'handleGoogleCallback'])
     ->name('login.google.callback');
-
-Route::get('/admin/login', [AdminAuthController::class,'showLogin'])
-    ->name('admin.login');
-
-Route::post('/admin/login', [AdminAuthController::class,'login'])
-    ->name('admin.login.submit');
