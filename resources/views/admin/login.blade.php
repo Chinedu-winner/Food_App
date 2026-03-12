@@ -20,15 +20,15 @@
 
             <div>
                 <label class="block text-gray-700 font-semibold mb-1">Email</label>
-                <input type="email" name="email" required
+                <input type="email" name="email" value="{{ old('email') }}" required
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400">
             </div>
-
+<!-- 
             <div>
                 <label class="block text-gray-700 font-semibold mb-1">Admin ID</label>
-                <input type="number" name="admin_id" required
+                <input type="number" name="admin_id" value="{{ old('admin_id') }}" required
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400">
-            </div>
+            </div> -->
 
             <div>
                 <label class="block text-gray-700 font-semibold mb-1">Password</label>
