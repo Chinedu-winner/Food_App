@@ -11,7 +11,7 @@ class AdminAuthController extends Controller{
     }
 
     public function login(Request $request){
-        $credentials = $request->only('email','password');
+        $credentials = $request->only('email','password', 'admin_id');
         if (Auth::attempt($credentials)) {
             return redirect()->route('admin.dashboard');
         }
