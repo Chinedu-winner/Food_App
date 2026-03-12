@@ -1,19 +1,19 @@
 <?php
-namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\AccessLog;
+namespace App\Http\Middleware;
 
-class AdminAuthController extends Controller{
-    public function dashboard(){
-        if (auth()->user()->role !== 'admin') {
-            abort(403, 'Unauthorized');
+use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class AdminAuth
+{
+    public function handle(Request $request, Closure $next)
+    {
+        if (Auth::check() && Auth::user()->role === 'admin') {
+            return $next($request);
         }
 
-        $uniqueUsers = AccessLog::select('name', 'email')
-                                ->distinct()
-                                ->get();
-
-        return view('admin.dashboard', compact('uniqueUsers'));
+        abort(403, 'Unauthorized');
     }
 }

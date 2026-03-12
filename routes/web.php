@@ -80,7 +80,7 @@ Route::post('/track', function (Request $request) {
 
 
 Route::get('/admin/dashboard', [AdminAuthController::class, 'dashboard'])
-    ->middleware('auth') 
+    ->middleware(['auth', 'admin']) 
     ->name('admin.dashboard');
 
 Route::get('orders/{order}/status', function($order) {

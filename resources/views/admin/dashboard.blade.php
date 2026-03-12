@@ -40,14 +40,37 @@
 
         <!-- Stats Cards -->
         <div class="grid grid-cols-4 gap-6 mb-10">
+<div class="grid grid-cols-4 gap-6 mb-10">
 
+    <div class="bg-white p-6 rounded shadow col-span-4">
         <h2>Admin Access Log</h2>
-                <ul>
-                @foreach($uniqueUsers as $user)
-                    <li>{{ $user->name }} - {{ $user->email }}</li>
-                @endforeach
-                </ul>
+        @if($uniqueUsers->count())
+        <ul>
+            @foreach($uniqueUsers as $user)
+                <li>{{ $user->name }} - {{ $user->email }}</li>
+            @endforeach
+        </ul>
+        @else
+        <p>No access logs yet.</p>
+        @endif
+    </div>
 
+    <div class="bg-white p-6 rounded shadow">
+        <h3 class="text-gray-500">Total Orders</h3>
+        <p class="text-2xl font-bold">85</p>
+    </div>
+
+    <div class="bg-white p-6 rounded shadow">
+        <h3 class="text-gray-500">Restaurants</h3>
+        <p class="text-2xl font-bold">15</p>
+    </div>
+
+    <div class="bg-white p-6 rounded shadow">
+        <h3 class="text-gray-500">Revenue</h3>
+        <p class="text-2xl font-bold">₦450,000</p>
+    </div>
+
+</div>
             <div class="bg-white p-6 rounded shadow">
                 <h3 class="text-gray-500">Total Orders</h3>
                 <p class="text-2xl font-bold">85</p>
