@@ -17,7 +17,6 @@
 
         <form method="POST" action="{{ route('admin.login.submit') }}" class="space-y-4">
             @csrf
-
             <div>
                 <label class="block text-gray-700 font-semibold mb-1">Email</label>
                 <input type="email" name="email" value="{{ old('email') }}" required
