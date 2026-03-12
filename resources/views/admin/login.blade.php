@@ -1,34 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1470&q=80');">
 
-<h2>Admin Login</h2>
+    <div class="bg-white/90 p-8 rounded-2xl shadow-lg max-w-md w-full">
+        <h2 class="text-3xl font-bold text-orange-600 mb-6 text-center">Admin Login</h2>
 
-@if(session('error'))
-<p style="color:red">{{ session('error') }}</p>
-@endif
+        @if(session('error'))
+            <p class="text-red-500 text-center mb-4">{{ session('error') }}</p>
+        @endif
 
-<form method="POST" action="{{ route('admin.login.submit') }}">
-    @csrf
+        <form method="POST" action="{{ route('admin.login.submit') }}" class="space-y-4">
+            @csrf
 
-    <label>Email</label>
-    <input type="email" name="email" required>
-    <br><br>
+            <div>
+                <label class="block text-gray-700 font-semibold mb-1">Email</label>
+                <input type="email" name="email" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400">
+            </div>
 
-    <label>Admin ID</label>
-    <input type="number" name="admin_id" required>
-    <br><br>
+            <div>
+                <label class="block text-gray-700 font-semibold mb-1">Admin ID</label>
+                <input type="number" name="admin_id" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400">
+            </div>
 
-    <label>Password</label>
-    <input type="password" name="password" required>
-    <br><br>
+            <div>
+                <label class="block text-gray-700 font-semibold mb-1">Password</label>
+                <input type="password" name="password" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400">
+            </div>
 
-    <button type="submit">Login</button>
-
-</form>
+            <button type="submit"
+                class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 rounded-lg transition duration-300">
+                Login
+            </button>
+        </form>
+    </div>
 
 </body>
 </html>

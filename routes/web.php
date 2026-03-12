@@ -83,7 +83,7 @@ Route::get('/admin/dashboard', [AdminAuthController::class, 'dashboard'])
     ->middleware(['auth', 'admin']) 
     ->name('admin.dashboard');
 
-Route::get('orders/{order}/status', function($order) {
+Route::get('orders/{order}/status', function($order) { 
     return "Status of order: " . $order;
 })->name('orders.status');
 
