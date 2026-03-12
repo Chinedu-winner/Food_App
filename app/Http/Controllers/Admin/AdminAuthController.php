@@ -11,11 +11,18 @@ class AdminAuthController extends Controller{
     }
 
     public function login(Request $request){
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-        // 'admin_id' => 'required|numeric',
-    ]);
+    $credentials = $request->only('email', 'password');
+    $remember = $request->has('remember');
+
+    if (Auth::attempt($credentials, $remember)) {
+        $request->session()->regenerate();
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+        return redirect()->intended('/home');
+    }
+    return back()->with('error', 'Invalid credentials');
+    
 
     $credentials = $request->only('email','password');
     if (Auth::attempt($credentials)) {

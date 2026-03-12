@@ -10,10 +10,10 @@
 
     <div class="bg-white/90 p-8 rounded-2xl shadow-lg max-w-md w-full">
         <h2 class="text-3xl font-bold text-orange-600 mb-6 text-center">Admin Login</h2>
-<!-- 
+
         @if(session('error'))
             <p class="text-red-500 text-center mb-4">{{ session('error') }}</p>
-        @endif -->
+        @endif 
 
         <form method="POST" action="{{ route('admin.login.submit') }}" class="space-y-4">
             @csrf

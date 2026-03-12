@@ -6,15 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
-{
-    public function showLoginForm()
-    {
-        $credentials = $request->only('email', 'password');
-        if (Auth:: attempt($credentials, $request->has('rememeber'))){
-            return redirect()->route('dashboard'); 
-        }
-        return back()->widthErrors(['email' =>'Invalid credential']); 
+class LoginController extends Controller{
+    public function showLoginForm(){   
+        return view('auth.login'); // just show the login form
+
     }
 
     public function login(Request $request)
@@ -42,8 +37,8 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
         return redirect('/');
     }
-    public function index(){
-    $user = Auth::user(); 
-    return view('dashboard', compact('user'));
-    }
+    // public function index(){
+    // $user = Auth::user(); 
+    // return view('dashboard', compact('user'));
+    // }
 }
