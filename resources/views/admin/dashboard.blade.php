@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -19,7 +20,7 @@
 
             <a href="#" class="block py-2 px-3 rounded hover:bg-gray-700">Dashboard</a>
             <a href="#" class="block py-2 px-3 rounded hover:bg-gray-700">User</a>
-            <a href="#" class="block py-2 px-3 rounded hover:bg-gray-700">Restaurants</a>
+            <a href="{{ route('admin.access.logs') }}" class="block py-2 px-3 rounded hover:bg-gray-700">Admin Access Logs</a>
             <a href="#" class="block py-2 px-3 rounded hover:bg-gray-700">Meals</a>
             <a href="#" class="block py-2 px-3 rounded hover:bg-gray-700">Orders</a>
             <a href="#" class="block py-2 px-3 rounded hover:bg-gray-700">Payments</a>
@@ -40,37 +41,6 @@
 
         <!-- Stats Cards -->
         <div class="grid grid-cols-4 gap-6 mb-10">
-<div class="grid grid-cols-4 gap-6 mb-10">
-
-    <div class="bg-white p-6 rounded shadow col-span-4">
-        <h2>Admin Access Log</h2>
-        @if($uniqueUsers->count())
-        <ul>
-            @foreach($uniqueUsers as $user)
-                <li>{{ $user->name }} - {{ $user->email }}</li>
-            @endforeach
-        </ul>
-        @else
-        <p>No access logs yet.</p>
-        @endif
-    </div>
-
-    <div class="bg-white p-6 rounded shadow">
-        <h3 class="text-gray-500">Total Orders</h3>
-        <p class="text-2xl font-bold">85</p>
-    </div>
-
-    <div class="bg-white p-6 rounded shadow">
-        <h3 class="text-gray-500">Restaurants</h3>
-        <p class="text-2xl font-bold">15</p>
-    </div>
-
-    <div class="bg-white p-6 rounded shadow">
-        <h3 class="text-gray-500">Revenue</h3>
-        <p class="text-2xl font-bold">₦450,000</p>
-    </div>
-
-</div>
             <div class="bg-white p-6 rounded shadow">
                 <h3 class="text-gray-500">Total Orders</h3>
                 <p class="text-2xl font-bold">85</p>
@@ -86,6 +56,24 @@
                 <p class="text-2xl font-bold">₦450,000</p>
             </div>
 
+            <div class="bg-white p-6 rounded shadow">
+                <h3 class="text-gray-500">Users</h3>
+                <p class="text-2xl font-bold">120</p>
+            </div>
+        </div>
+
+        <!-- Recent Admin Logins -->
+        <div class="bg-white rounded shadow p-6 mb-10">
+            <h2 class="text-xl font-semibold mb-4">Recent Admin Logins</h2>
+            @if(isset($recentLogins) && $recentLogins->count())
+                <ul class="divide-y divide-gray-200">
+                    @foreach($recentLogins as $log)
+                        <li class="py-2">Admin: <strong>{{ $log->admin->name ?? 'N/A' }}</strong> logged in from {{ $log->ip_address }} - <span class="text-gray-500 text-sm">{{ $log->created_at->diffForHumans() }}</span></li>
+                    @endforeach
+                </ul>
+            @else
+                <p>No recent admin logins found.</p>
+            @endif
         </div>
 
         <!-- Recent Orders -->
@@ -147,7 +135,7 @@ function timerIncrement() {
     idleTime++;
     if (idleTime > 5){
         alert("You have been logged out due to inactivity.");
-        window.location.href = "{{ route('login') }}";
+        window.location.href = "{{ route('admin.login') }}";
     }
 }
 </script>

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -10,11 +11,10 @@
 
     <div class="bg-white/90 p-8 rounded-2xl shadow-lg max-w-md w-full">
         <h2 class="text-3xl font-bold text-orange-600 mb-6 text-center">Admin Login</h2>
-
+        <span class="text-gray-700 font-medium">Hello, {{ Auth::check() ? Auth::user()->name : 'Guest' }}, Welcome to FoodWin, where your request is our maximum satisfaction. </span>
         @if(session('error'))
-            <p class="text-red-500 text-center mb-4">{{ session('error') }}</p>
+            <p class="text-blue-900 text-center mb-4">{{ session('error') }}</p>
         @endif 
-
         <form method="POST" action="{{ route('admin.login.submit') }}" class="space-y-4">
             @csrf
             <div>
@@ -22,12 +22,12 @@
                 <input type="email" name="email" value="{{ old('email') }}" required
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400">
             </div>
-<!-- 
-            <div>
+
+        <div>
                 <label class="block text-gray-700 font-semibold mb-1">Admin ID</label>
                 <input type="number" name="admin_id" value="{{ old('admin_id') }}" required
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400">
-            </div> -->
+        </div>
 
             <div>
                 <label class="block text-gray-700 font-semibold mb-1">Password</label>

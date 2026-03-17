@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminAuth {
     public function handle(Request $request, Closure $next) {
-        $user = Auth::user();
-
-        if ($user && $user->role === 'admin') {
+        if (Auth::check() && Auth::user()->admin_id) {
             return $next($request);
         }
 

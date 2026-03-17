@@ -1,43 +1,39 @@
 <?php
 namespace App\Http\Controllers\Admin;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\AccessLog;
 
 class AdminAuthController extends Controller{
     public function showLogin(){
+        if (Auth::check() && Auth::user()->admin_id) {
+            return redirect()->route('admin.dashboard');
+        }
         return view('admin.login');
     }
 
     public function login(Request $request){
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
         $credentials = $request->only('email', 'password');
         $remember = $request->has('remember');
 
-    if (Auth::attempt($credentials, $remember)) {
-        $request->session()->regenerate();
-        if (Auth::user()->role === 'admin') {
+        if (Auth::attempt($credentials, $remember)) {
+            // Enforce admin access check immediately after login
+            if (Auth::user()->admin_id) {
+            $request->session()->regenerate();
             return redirect()->route('admin.dashboard');
+            }
+
+            // If credentials are valid but user is not an admin
+            Auth::logout();
+            return back()->with('error', 'Access denied. You do not have administrative privileges.')->onlyInput('email');
         }
-        return redirect()->intended('/home');
-    }
-    return back()->with('error', 'Invalid credentials');
-    
 
-    $credentials = $request->only('email','password');
-    if (Auth::attempt($credentials)) {
-        $request->session()->put('admin_id', $request->admin_id);
-        return redirect()->route('admin.dashboard');
-    }
-    return back()->withInput()->with('error', 'Invalid login details');
-}
-    
-
-    public function dashboard(){
-        $uniqueUsers = AccessLog::select('name','email')
-                        ->distinct()
-                        ->get();
-
-        return view('admin.dashboard', compact('uniqueUsers'));
+        return back()->withInput()->with('error', 'Invalid credentials');
     }
 }

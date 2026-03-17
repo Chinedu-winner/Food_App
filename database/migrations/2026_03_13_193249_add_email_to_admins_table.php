@@ -6,10 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration{
     public function up(): void{
-        // Column 'role' is already defined in 0001_01_01_000000_create_users_table.php
+        Schema::table('admins', function (Blueprint $table) {
+                $table->string('email')->nullable();
+        });
     }
 
     public function down(): void{
-        //
+        Schema::table('admins', function (Blueprint $table) {
+            //
+        });
     }
 };

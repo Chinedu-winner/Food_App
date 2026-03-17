@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Admin\AdminAccessLogController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,28 +60,8 @@ Route::post('/track', function (Request $request) {
     if (!$order) {
         return back()->withErrors(['order_id' => 'Order not found or does not belong to you.']);
     }
-
     return redirect()->route('orders.track', ['order' => $order->id]);
 })->middleware('auth');
-
-Route::post('/track', function (Request $request) {
-    $request->validate(['order_id' => 'required|integer']);
-
-    $order = Order::where('id', $request->order_id)
-        ->where('user_id', Auth::id())
-        ->first();
-
-    if (!$order) {
-        return back()->withErrors(['order_id' => 'Order not found or does not belong to you.']);
-    }
-
-    return redirect()->route('orders.track', ['order' => $order->id]);
-})->middleware('auth');
-
-
-Route::get('/admin/dashboard', [AdminAuthController::class, 'dashboard'])
-    // ->middleware(['auth', 'admin']) 
-    ->name('admin.dashboard');
 
 Route::get('orders/{order}/status', function($order) { 
     return "Status of order: " . $order;
@@ -140,10 +120,9 @@ Route::get('/dashboard', function () {
     return view('dashboard'); 
 })->middleware('auth')->name('dashboard');
 
-Route::prefix('admin')->group(function() {
-    Route::get('login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
-    Route::post('login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
-    Route::get('dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
+    Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
 });
 
 Route::get('login/google', [SocialController::class, 'redirectToGoogle'])
@@ -151,3 +130,24 @@ Route::get('login/google', [SocialController::class, 'redirectToGoogle'])
 
 Route::get('login/google/callback', [SocialController::class, 'handleGoogleCallback'])
     ->name('login.google.callback');
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('access-logs', [AdminAccessLogController::class, 'index'])->name('admin.access.logs');
+});
+
+Route::prefix('admin')->group(function () {
+    // The 'auth' and 'admin' middleware were removed to make the dashboard public for now.
+    Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+});
+
+// Temporary route to create an admin user
+Route::get('/create-admin-user', function () {
+    $admin = User::create([
+        'name' => 'Admin User',
+        'email' => 'admin@foodwin.com',
+        'password' => Hash::make('password123'),
+        'admin_id' => '12345', // The ID you will enter in the form
+        'is_admin' => true,
+    ]);
+    return "Admin user created! Email: admin@foodwin.com, Password: password123, Admin ID: 12345";
+});
