@@ -17,7 +17,14 @@
                 <li class="mb-2"><a href="{{ route('admin.foods') }}" class="block px-6 py-2 hover:bg-gray-700">Foods</a></li>
                 <li class="mb-2"><a href="{{ route('admin.categories') }}" class="block px-6 py-2 hover:bg-gray-700">Categories</a></li>
                 <li class="mb-2"><a href="{{ route('admin.users') }}" class="block px-6 py-2 hover:bg-gray-700">Users</a></li>
-                <li class="mb-2"><a href="{{ route('admin.logout') }}" class="block px-6 py-2 hover:bg-gray-700">Logout</a></li>
+                <li class="mb-2">
+                    <a href="{{ route('admin.logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"  
+                        class="block px-6 py-2 hover:bg-gray-700">Logout</a>
+                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
             </ul>
         </nav>
     </aside>
@@ -32,5 +39,6 @@
         </div>
     </div>
 
+    @stack('scripts')
 </body>
 </html>

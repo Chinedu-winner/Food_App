@@ -2,11 +2,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\AdminAccessLog; // This now refers to the file created above
+use App\Models\AdminAccessLog; 
 
 class AdminDashboardController extends Controller{
     public function __construct(){
-        $this->middleware(['auth', 'admin']); 
+        $this->middleware(['admin']); 
     }
 
     public function index(){

@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration{
-    public function up(): void
-    {
+    public function up(): void{
         Schema::dropIfExists('access_logs');
         Schema::create('access_logs', function (Blueprint $table) {
             $table->id();
@@ -20,9 +19,6 @@ return new class extends Migration{
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void{
         Schema::dropIfExists('access_logs');
     }

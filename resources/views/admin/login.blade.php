@@ -26,21 +26,31 @@
         <div>
                 <label class="block text-gray-700 font-semibold mb-1">Admin ID</label>
                 <input type="number" name="admin_id" value="{{ old('admin_id') }}" required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400">
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400">
         </div>
 
-            <div>
-                <label class="block text-gray-700 font-semibold mb-1">Password</label>
-                <input type="password" name="password" required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400">
-            </div>
+        <div>
+    <label class="block text-gray-700 font-semibold mb-1">Password</label>
 
-            <button type="submit"
-                class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 rounded-lg transition duration-300">
-                Login
-            </button>
+    <div class="relative">
+        <input type="password" id="password"name="password" requiredclass="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400">
+        <button type="button" onclick="togglePassword()" class="absolute right-3 top-2 text-gray-600" id="toggleBtn">👁</button>
+    </div>
+    </div>
+        <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 rounded-lg transition duration-300">Login  </button>
         </form>
     </div>
 
 </body>
 </html>
+<script>
+function togglePassword() {
+    const passwordInput = document.getElementById("password");
+
+    if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    } else {
+    passwordInput.type = "password";
+    }
+}
+</script>

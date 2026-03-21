@@ -10,6 +10,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Models\Order;
+use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
@@ -112,9 +113,13 @@ Route::get('/meal', function () {
     return view('meal');
 })->name('meal');
 
-Route::match(['GET', 'POST'], '/pay/{id}', function($id) {
-    return (new PaymentController)->redirectToGateway($id);
-})->name('pay');
+Route::match(['GET', 'POST'], '/pay/{id}', 
+    [PaymentController::class, 'redirectToGateway'
+])->name('pay');
+
+Route::get('/payment/callback',
+    [PaymentController::class, 'handleCallback'])
+->name('payment.callback');
 
 Route::get('/dashboard', function () {
     return view('dashboard'); 
@@ -131,13 +136,26 @@ Route::get('login/google', [SocialController::class, 'redirectToGoogle'])
 Route::get('login/google/callback', [SocialController::class, 'handleGoogleCallback'])
     ->name('login.google.callback');
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+Route::middleware(['admin'])->prefix('admin')->group(function () {
+    Route::get('dashboard', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('access-logs', [AdminAccessLogController::class, 'index'])->name('admin.access.logs');
-});
+    Route::post('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
-Route::prefix('admin')->group(function () {
-    // The 'auth' and 'admin' middleware were removed to make the dashboard public for now.
-    Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/orders', function () {
+        return "Orders page";
+    })->name('admin.orders');
+
+    Route::get('/foods', function () {
+        return "Foods page";
+    })->name('admin.foods');
+
+    Route::get('/categories', function () {
+        return "Categories page";
+    })->name('admin.categories');
+
+    Route::get('/users', function () {
+        return "Users page";
+ })->name('admin.users');
 });
 
 // Temporary route to create an admin user

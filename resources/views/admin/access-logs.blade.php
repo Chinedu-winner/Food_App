@@ -1,4 +1,4 @@
-@extends('admin.layouts.app') <!-- or your admin layout -->
+@extends('admin.layouts.app')
 
 @section('content')
 <h1>Admin Access Logs</h1>

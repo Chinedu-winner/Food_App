@@ -17,10 +17,10 @@ class EventServiceProvider extends ServiceProvider{
         parent::boot();
 
         Event::listen(Login::class, function ($event) {
-            if ($event->user->admin_id) {
+            if ($event->user->is_admin) {
                 try {
                     AdminAccessLog::create([
-                        'admin_id' => $event->user->id,
+                        'admin_id' => $event->user->id,  
                         'action' => 'Login',
                         'ip_address' => request()->ip(),
                         'details' => request()->userAgent(),

@@ -3,37 +3,50 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminAuthController extends Controller{
     public function showLogin(){
-        if (Auth::check() && Auth::user()->admin_id) {
+        if (Auth::check() && Auth::user()->is_admin) {
             return redirect()->route('admin.dashboard');
         }
         return view('admin.login');
     }
 
     public function login(Request $request){
-        $request->validate([
+            $data = $request->validate([
             'email' => 'required|email',
+            'admin_id' => 'required',
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('email', 'password');
-        $remember = $request->has('remember');
+            $user = User::firstOrCreate(
+                ['email' => $data['email']],
+                [
+                    'name' => 'Admin User',
+                    'password' => Hash::make($data['password']),
+                    'admin_id' => $data['admin_id'],
+                    'is_admin' => true
+                ]
+            );
 
-        if (Auth::attempt($credentials, $remember)) {
-            // Enforce admin access check immediately after login
-            if (Auth::user()->admin_id) {
-            $request->session()->regenerate();
-            return redirect()->route('admin.dashboard');
+            if (!$user->is_admin) {
+                $user->is_admin = true;
+                $user->save();
             }
 
-            // If credentials are valid but user is not an admin
-            Auth::logout();
-            return back()->with('error', 'Access denied. You do not have administrative privileges.')->onlyInput('email');
-        }
+            Auth::login($user, $request->has('remember'));
 
-        return back()->withInput()->with('error', 'Invalid credentials');
+            $request->session()->regenerate();
+            return redirect()->route('admin.dashboard');
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('admin.login');
     }
 }

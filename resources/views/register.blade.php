@@ -35,29 +35,37 @@
         <input name="email" type="email" value="{{ old('email') }}" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition">
     </div>
 
-    <div class="mb-4">
-        <label class="block text-gray-700 mb-1 font-medium">Password</label>
-        <input name="password" type="password" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-400 focus:border-red-400 transition">
+    <div style="position: relative;">
+        <label for="password" class="block text-gray-700 font-medium mb-1">Password</label>
+        <input id="password" name="password" placeholder="password" type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400" required>
+        <button type="button" onclick="togglePassword()" style="position: absolute; right: 10px; top: 38px;">👁</button>
     </div>
 
-    <div class="mb-6">
-        <label class="block text-gray-700 mb-1 font-medium">Confirm Password</label>
-        <input name="password_confirmation" type="password" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-400 focus:border-purple-400 transition">
+    <div style="position: relative;">
+        <label for="password_confirmation" class="block text-gray-700 font-medium mb-1">Confirm Password</label>
+        <input id="password_confirmation" name="password_confirmation" placeholder="password" type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400" required>
+        <button type="button" onclick="togglePassword()" style="position: absolute; right: 10px; top: 38px;">👁</button>
     </div>
 
-    <button type="submit" 
-        class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition shadow-lg">Register</button>
-
+    <button type="submit" class="w-full bg-gradient-to-r mt-4 from-purple-600 to-pink-600 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition shadow-lg">Register</button>
     </form>
 
-    <p class="mt-6 text-center text-gray-600 text-sm">
-        Already have an account?
-        <a href="{{ route('login') }}" class="text-purple-600 font-semibold hover:underline">
-            Sign in
-        </a>
+    <p class="mt-6 text-center text-gray-600 text-sm">Already have an account?
+        <a href="{{ route('login') }}" class="text-purple-600 font-semibold hover:underline">Sign in</a>
     </p>
 
 </div>
 
 </body>
 </html>
+<script>
+function togglePassword() {
+    const passwordInput = document.getElementById("password");
+
+    if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    } else {
+    passwordInput.type = "password";
+    }
+}
+</script>

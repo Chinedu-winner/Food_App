@@ -11,6 +11,13 @@ class PaymentController extends Controller{
     public function redirectToGateway($id){
         $meal = Meal::findOrFail($id);
 
+        session([
+            'meal_name' => $meal->name,
+            'meal_price' => $meal->price,
+            'meal_quantity' => 1,
+        ]);
+        session()->save();
+
         $paystack = new Paystack(env('PAYSTACK_SECRET_KEY'));
 
         try {
@@ -38,21 +45,29 @@ class PaymentController extends Controller{
             ]);
 
             if ($tranx->data->status === 'success') {
-                // Save order as paid
+                if (!auth()->check() || !session()->has('meal_name')) {
+                    return redirect('/meal')->with('error', 'An error occurred, please try again. Your session might have expired.');
+                }
+
                 Order::create([
                     'user_id' => auth()->id(),
                     'name'    => auth()->user()->name,
                     'food_name' => session('meal_name'),
                     'quantity' => session('meal_quantity'),
                     'price' => session('meal_price'),
-                    'total' => session('meal_price'), 
+                    'total' => session('meal_price') * session('meal_quantity', 1),
                     'status' => 'paid',
+                    'address' => auth()->user()->address ?? 'Not Provided',
+                    'phone' => auth()->user()->phone ?? 'Not Provided',
                 ]);
 
-                return redirect('/meal')->with('success', 'Payment successful!');
+                $user = auth()->user();
+                $meal = (object) ['name' => session('meal_name'), 'price' => session('meal_price')];
+                session()->forget(['meal_name', 'meal_price', 'meal_quantity']);
+                return view('payment', compact('user', 'meal'));
             }
         } catch (\Exception $e) {
-            //
+            return redirect('/meal')->with('error', 'Payment verification failed: ' . $e->getMessage());
         }
 
         return redirect('/meal')->with('error', 'Payment failed.');

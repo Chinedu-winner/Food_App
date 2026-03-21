@@ -26,10 +26,12 @@
         <input id="email" name="email" placeholder="email@gmail" type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"value="{{ old('email') }}" required autofocus>
     </div>
 
-    <div>
+    <div style="position: relative;">
         <label for="password" class="block text-gray-700 font-medium mb-1">Password</label>
-        <input id="password" name="password" placeholder="password" type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"required>
+        <input id="password" name="password" placeholder="password" type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400" required>
+        <button type="button" onclick="togglePassword()" style="position: absolute; right: 10px; top: 38px;">👁</button>
     </div>
+
 
     <div class="flex justify-between items-center text-sm text-gray-600">
         <label class="flex items-center gap-2">
@@ -51,3 +53,14 @@
 
 </body>
 </html>
+<script>
+function togglePassword() {
+    const passwordInput = document.getElementById("password");
+
+    if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    } else {
+    passwordInput.type = "password";
+    }
+}
+</script>

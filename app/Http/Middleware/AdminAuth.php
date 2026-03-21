@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AdminAuth {
-    public function handle(Request $request, Closure $next) {
-        if (Auth::check() && Auth::user()->admin_id) {
+    public function handle(Request $request, Closure $next){
+        if (Auth::check() && Auth::user()->is_admin) {
             return $next($request);
         }
 
-        return redirect()->route('admin.login')->with('error', 'Access denied. You are not an admin.');
+        return redirect()->route('admin.login');
     }
 }

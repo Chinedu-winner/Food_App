@@ -33,12 +33,11 @@
     }
   </script>
 </head>
-<body class="font-sans antialiased text-bistro-dark relative min-h-screen overflow-auto bg-bistro-bg">
-
-  <div class="fixed inset-0 -z-10">
-    <div class="w-full h-full bg-gradient-to-r from-pink-500 via-yellow-400 to-purple-500 bg-[length:200%_200%] animate-gradient-x"></div>
-  </div>
-
+<body class="text-gray-800">
+<div class="fixed inset-0 -z-10 overflow-hidden bg-gray-900 bg-cover bg-center transition-all duration-1000 ease-in-out" id='box'>
+  <div class="absolute inset-0 bg-white/30 backdrop-blur-[2px]"></div>
+</div>
+  
   <div class="container mx-auto max-w-6xl px-5 py-16 md:py-20 relative z-10">
 
     <h1 class="text-center text-5xl md:text-6xl font-extrabold text-bistro-title mb-3 drop-shadow-lg">FoodWin</h1>
@@ -48,7 +47,6 @@
       <h2 class="text-4xl md:text-5xl font-semibold text-bistro-heading border-b-4 border-bistro-border pb-4 mb-10 inline-block">Appetizers</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-        <!-- Chin Chin -->
         <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
           <img src="{{ asset('Golden Nigerian chin chin.png') }}" alt="Chin Chin" class="w-full h-56 md:h-64 object-cover"/>
           <div class="p-6">
@@ -66,7 +64,6 @@
           </div>
         </div>
 
-        <!-- Crispy Calamari -->
         <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
           <img src="https://www.granvilleislandspiceco.com/cdn/shop/articles/20240306110906-crispy-20calamari-20with-20lemon-pepper-20aioli-20image-203_1200x800.jpg?v=1709723359" alt="Crispy fried calamari rings with lemon aioli" class="w-full h-56 md:h-64 object-cover">
           <div class="p-6">
@@ -77,7 +74,6 @@
               <div class="text-xl text-bistro-star flex items-center">
                 ★★★★☆ <span class="text-gray-400 text-lg ml-2">4.6</span>
                 <form action="{{route ('pay', ['id' => 2])}}" method="GET" class="ml-4">
-                  @csrf
                   <button type="submit" class="px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
                 </form>
               </div>
@@ -85,7 +81,6 @@
           </div>
         </div>
 
-        <!-- Mozzarella Sticks -->
         <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
           <img src="https://thumbs.dreamstime.com/b/golden-fried-cheese-sticks-served-marinara-sauce-crispy-mozzarella-herbs-white-plate-red-dip-popular-restaurant-appetizer-388305264.jpg" alt="Golden mozzarella sticks with marinara sauce" class="w-full h-56 md:h-64 object-cover">
           <div class="p-6">
@@ -96,7 +91,6 @@
               <div class="text-xl text-bistro-star flex items-center">
                 ★★★★☆ <span class="text-gray-400 text-lg ml-2">4.4</span>
                 <form action="{{route ('pay', ['id' => 3])}}" method="GET" class="ml-4">
-                  @csrf
                   <button type="submit" class="px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
                 </form>
               </div>
@@ -107,12 +101,10 @@
       </div>
     </section>
 
-    <!-- Main Courses -->
     <section class="mb-20">
       <h2 class="text-4xl md:text-5xl font-semibold text-bistro-heading border-b-4 border-bistro-border pb-4 mb-10 inline-block">Main Courses</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-        <!-- Beef Burger Deluxe -->
         <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
           <img src="https://thumbs.dreamstime.com/b/juicy-beef-burger-melted-cheese-fresh-tomato-crispy-french-fries-rustic-plate-ready-to-eat-mouthwatering-close-up-352647615.jpg" alt="Juicy beef burger deluxe with cheese, tomato, and fries" class="w-full h-56 md:h-64 object-cover">
           <div class="p-6">
@@ -123,7 +115,6 @@
               <div class="text-xl text-bistro-star flex items-center">
                 ★★★★★ <span class="text-gray-400 text-lg ml-2">4.9</span>
                 <form action="{{route ('pay', ['id' => 4])}}" method="GET" class="ml-4">
-                  @csrf
                   <button type="submit" class="px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
                 </form>
               </div>
@@ -131,7 +122,6 @@
           </div>
         </div>
 
-        <!-- Grilled Salmon -->
         <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
           <img src="https://iheartvegetables.com/wp-content/uploads/2023/12/Exclusive-Cashew-Tofu-and-Vegetable-Stir-Fry-4364-Large.jpeg" alt="Grilled salmon with vegetables" class="w-full h-56 md:h-64 object-cover">
           <div class="p-6">
@@ -142,7 +132,6 @@
               <div class="text-xl text-bistro-star flex items-center">
                 ★★★★★ <span class="text-gray-400 text-lg ml-2">4.8</span>
                 <form action="{{route ('pay', ['id' => 5])}}" method="GET" class="ml-4">
-                  @csrf
                   <button type="submit" class="px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
                 </form>
               </div>
@@ -150,7 +139,6 @@
           </div>
         </div>
 
-        <!-- Creamy Mushroom Pasta -->
         <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
           <img src="https://www.veggievibesandvines.com/wp-content/uploads/2024/09/Wild-Mushroom-Truffle-Pasta-scaled.jpg" alt="Creamy mushroom fettuccine with truffle sauce" class="w-full h-56 md:h-64 object-cover">
           <div class="p-6">
@@ -161,7 +149,6 @@
               <div class="text-xl text-bistro-star flex items-center">
                 ★★★★½ <span class="text-gray-400 text-lg ml-2">4.7</span>
                 <form action="{{route ('pay', ['id' => 6])}}" method="GET" class="ml-4">
-                  @csrf
                   <button type="submit" class="px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">Order Now</button>
                 </form>
               </div>
@@ -172,10 +159,23 @@
       </div>
     </section>
 
-    <!-- You can continue similarly for Nigerian Specialties, Soup, etc. -->
-
     <footer class="mt-24 pt-10 border-t border-gray-300 text-center text-gray-600 text-sm">Prices are in USD • All ratings based on customer reviews • Menu updated February 2026</footer>
 
   </div>
 </body>
 </html>
+<script>
+  const colors = ['bg-red-500',
+    'bg-blue-500', 'bg-green-500',
+    'bg-yellow-500',]
+    function randomBg(){
+      const box =
+      documenet.getElementBy('box'); 
+      const random = 
+      colour[Math.floor(Math.random()*
+    colors.length)];
+    
+    box.className = "w-full h-40" + random;
+    }
+    setInterval(randomBg, 4000); 
+</script>
