@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Auth\SocialController;
+use App\Http\Controllers\Admin\FoodController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Models\Order;
 use App\Http\Controllers\Admin\AdminDashboardController;
@@ -131,7 +132,7 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('login/google', [SocialController::class, 'redirectToGoogle'])
-    ->name('login.google');
+    ->name('login.google'); 
 
 Route::get('login/google/callback', [SocialController::class, 'handleGoogleCallback'])
     ->name('login.google.callback');
@@ -155,7 +156,7 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 
     Route::get('/users', function () {
         return "Users page";
- })->name('admin.users');
+})->name('admin.users');
 });
 
 // Temporary route to create an admin user
@@ -168,4 +169,24 @@ Route::get('/create-admin-user', function () {
         'is_admin' => true,
     ]);
     return "Admin user created! Email: admin@foodwin.com, Password: password123, Admin ID: 12345";
+});
+
+Route::prefix('admin')->middleware(['auth','admin'])->group(function(){
+    Route::resource('food', \App\Http\Controllers\Admin\FoodController::class);
+});
+
+Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
+    
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+
+    Route::prefix('foods')->name('foods.')->group(function () {
+        Route::get('/', [FoodController::class, 'index'])->name('index');
+        Route::get('/create', [FoodController::class, 'create'])->name('create');
+        Route::post('/', [FoodController::class, 'store'])->name('store');
+        Route::get('/{food}/edit', [FoodController::class, 'edit'])->name('edit');
+        Route::put('/{food}', [FoodController::class, 'update'])->name('update');
+        Route::delete('/{food}', [FoodController::class, 'destroy'])->name('destroy');
+    });
 });

@@ -12,9 +12,9 @@ class AdminDashboardController extends Controller{
     public function index(){
         $recentLogins = AdminAccessLog::with('admin')
                             ->latest()
-                            ->take(5)
-                            ->get();
-
+                            // ->take(5)
+                            // ->get()
+                            ->paginate(10); 
         return view('admin.dashboard', compact('recentLogins'));
     }
 }

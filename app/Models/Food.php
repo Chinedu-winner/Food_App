@@ -9,30 +9,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
 
-class Food extends Model
-{
+class Food extends Model{
     use HasFactory;
 
     protected $table = 'food';
 
     protected $fillable = [
-        'name',
-        'description',
-        'price',
-        'category_id',
-        'restaurant_id',
-        'image',
-        'available',
-        'ingredients',
-        'calories',
-        'dietary_restrictions',
-        'preparation_time',
-        'is_vegetarian',
-        'is_vegan',
-        'is_gluten_free',
-        'rating',
-    ];
-
+    'name',
+    'description',
+    'price',
+    'image',
+    'category_id',
+    'status'
+];
     protected $casts = [
         'available' => 'boolean',
         'price' => 'decimal:2',
@@ -97,8 +86,8 @@ class Food extends Model
 
         return $query->where(function (Builder $q) use ($term) {
             $q->where('name', 'like', $term)
-              ->orWhere('description', 'like', $term)
-              ->orWhereJsonContains('ingredients', $term);
+            ->orWhere('description', 'like', $term)
+            ->orWhereJsonContains('ingredients', $term);
         });
     }
 

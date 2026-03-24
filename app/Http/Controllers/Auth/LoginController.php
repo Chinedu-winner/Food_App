@@ -21,14 +21,9 @@ class LoginController extends Controller{
 
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            AdminAccessLog::create([
-                'admin_id' => Auth::id(),
-                'action' => 'user Logged In',
-                'ip_address' => request()->ip(),
-            ]);
-
-        return redirect('admin/dashboard'); 
-            }
+            
+            return redirect('admin/dashboard'); 
+        }
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',

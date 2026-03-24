@@ -39,8 +39,14 @@ class AdminAuthController extends Controller{
 
             Auth::login($user, $request->has('remember'));
 
+        if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']], $request->has('remember'))) {
             $request->session()->regenerate();
             return redirect()->route('admin.dashboard');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 
     public function logout(Request $request){

@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\Log;
 
 class EventServiceProvider extends ServiceProvider{
     protected $listen = [
-        
+        \App\Events\AdminLoginEvent::class => [
+            \App\Listeners\LogAdminLogin::class,
+        ],
     ];
-
+    
     public function boot(): void{
         parent::boot();
 
@@ -20,7 +22,7 @@ class EventServiceProvider extends ServiceProvider{
             if ($event->user->is_admin) {
                 try {
                     AdminAccessLog::create([
-                        'admin_id' => $event->user->id,  
+                        'admin_id' => $event->user->id, 
                         'action' => 'Login',
                         'ip_address' => request()->ip(),
                         'details' => request()->userAgent(),

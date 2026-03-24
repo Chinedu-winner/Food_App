@@ -14,7 +14,27 @@
             <ul>
                 <li class="mb-2"><a href="{{ route('admin.dashboard') }}" class="block px-6 py-2 hover:bg-gray-700">Dashboard</a></li>
                 <li class="mb-2"><a href="{{ route('admin.orders') }}" class="block px-6 py-2 hover:bg-gray-700">Orders</a></li>
-                <li class="mb-2"><a href="{{ route('admin.foods') }}" class="block px-6 py-2 hover:bg-gray-700">Foods</a></li>
+                <li class="menu-item relative group mb-2">
+                <span class="cursor-pointer block px-6 py-2 hover:bg-gray-700 font-bold">Food</span>
+            
+                <ul class="absolute left-full top-0 hidden group-hover:block bg-gray-800 text-white w-56 shadow-lg">
+                    <li>
+                        <a href="{{ route('admin.foods.index') }}" class="block px-4 py-2 hover:bg-gray-700">Food List</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.foods.create') }}" class="block px-4 py-2 hover:bg-gray-700">Add Food</a>
+                    </li>
+            
+                    @if(isset($foods) && $foods->count())
+                        <li class="border-t border-gray-600 mt-1 mb-1"></li>
+                        @foreach($foods as $food)
+                            <li>
+                                <a href="{{ route('admin.foods.edit', $food->id) }}" class="block px-4 py-2 hover:bg-gray-700">{{ $food->name }}</a>
+                            </li>
+                        @endforeach
+                    @endif
+                </ul>
+            </li>         
                 <li class="mb-2"><a href="{{ route('admin.categories') }}" class="block px-6 py-2 hover:bg-gray-700">Categories</a></li>
                 <li class="mb-2"><a href="{{ route('admin.users') }}" class="block px-6 py-2 hover:bg-gray-700">Users</a></li>
                 <li class="mb-2">
