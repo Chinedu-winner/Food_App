@@ -15,7 +15,7 @@
     <div class="text-red-600 text-sm mb-4 px-3 py-2 bg-red-100 rounded">{{ $errors->first() }}</div>
     @endif
 
-    @if(session('error'))
+    @if(session('error')) 
     <div class="text-red-600 text-sm mb-4 px-3 py-2 bg-red-100 rounded">{{ session('error') }}</div>
     @endif
 

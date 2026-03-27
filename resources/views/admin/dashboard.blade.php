@@ -1,5 +1,4 @@
 @extends('admin.admin')
-
 @section('page-title', 'Dashboard Overview')
 
 @section('content')
@@ -33,19 +32,78 @@
             <p class="text-2xl font-bold">120</p>
         </div>
     </div>
+    
+    <div class="recent-logins mt-6">
+    <h3 class="font-semibold mb-2">Admin Logins</h3>
 
-    <!-- Recent Admin Logins -->
-    <div class="bg-white rounded shadow p-6 mb-10">
-        <h2 class="text-xl font-semibold mb-4">Recent Admin Logins</h2>
-        @if(isset($recentLogins) && $recentLogins->count())
-            <ul class="divide-y divide-gray-200">
-                @foreach($recentLogins as $log)
-                    <li class="py-2">Admin: <strong>{{ $log->admin->name ?? 'N/A' }}</strong> logged in from {{ $log->ip_address }} - <span class="text-gray-500 text-sm">{{ $log->created_at->diffForHumans() }}</span></li>
-                @endforeach
-            </ul>
-        @else
-            <p>No recent admin logins found.</p>
-        @endif
+    <table class="w-full mt-6 text-left border">
+        <thead>
+            <tr class="bg-gray-200">
+                <th class="p-2 border">Name</th>
+                <th class="p-2 border">Email</th>
+                <th class="p-2 border">IP Address</th>
+                <th class="p-2 border">Device</th>
+                <th class="p-2 border">Date & Time</th>
+            </tr>
+        </thead>
+        <tbody>
+    @if(isset($recentLogins) && $recentLogins->count())
+        @foreach($recentLogins as $log)
+            <tr>
+                <td class="p-2 border">{{ $log->admin->name }}</td>
+                <td class="p-2 border">{{ $log->admin->email }}</td>
+                <td class="p-2 border">{{ $log->ip_address }}</td>
+                <td class="p-2 border">{{ $log->device }}</td>
+                <td class="p-2 border">{{ $log->created_at->format('d M Y H:i') }}</td>
+            </tr>
+        @endforeach
+    @else
+        <tr>
+            <td class="p-2 border text-center" colspan="5">No logins found.</td>
+        </tr>
+    @endif
+</tbody>
+    </table>
+    <h2>Recent Users</h2>
+
+    <table class="w-full mt-6 text-left border">
+        <thead>
+            <tr class="bg-gray-200">
+                <th class="p-2 border">Name</th>
+                <th class="p-2 border">Email</th>
+                <th class="p-2 border">Date & Time</th>
+
+            </tr>
+        </thead>
+
+        @foreach($users as $user)
+            <tr>
+                <td class="p-2 border">{{ $user->name }}</td>
+                <td class="p-2 border">{{ $user->email }}</td>
+                <td>{{ $user->created_at->format('d M Y H:i') }}</td>
+            </tr>
+        @endforeach
+    </table>
+
+    <!-- control the food part  -->
+    <div class="bg-white p-6 rounded-xl shadow">
+    <h2 class="text-gray-500">Total Foods</h2>
+    <p class="text-3xl font-bold">{{ $totalFoods }}</p> 
+    </div>
+
+    @foreach($latestFoods as $food)
+    <div class="border-b py-2">
+        <p class="font-semibold">{{ $food->name }}</p>
+        <small class="text-gray-500">
+            Added {{ $food->created_at->diffForHumans() }}
+        </small>
+    </div>
+    @endforeach
+
+    <a href="{{ route('admin.users') }}">
+        <button>See More</button>
+    </a>
+        {{ $recentLogins->links() }}
     </div>
 
     <div class="bg-white rounded shadow p-6">

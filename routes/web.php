@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Food;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\PaymentController;
@@ -111,16 +112,27 @@ Route::post('/register', function(Request $request) {
 })->name('register.submit');
 
 Route::get('/meal', function () {
-    return view('meal');
+    $foods = Food::all(); 
+    return view('Meal',  ['foods' => $foods]);
 })->name('meal');
 
-Route::match(['GET', 'POST'], '/pay/{id}', 
-    [PaymentController::class, 'redirectToGateway'
-])->name('pay');
+Route::get('/meal', 
+    [MealController::class, 'index'
+])->name('meal.index');
 
-Route::get('/payment/callback',
-    [PaymentController::class, 'handleCallback'])
-->name('payment.callback');
+Route::post('/meal', 
+    [MealController::class, 'store'
+])->name('meal.store');
+
+Route::get('/pay/{id}', [PaymentController::class,
+    'redirectToGateway'
+])->name('payment.pay'); 
+
+Route::get('/payment/callback', [PaymentController::class, 
+    'handleCallback'
+])->name('payment.callback');
+
+Route::get('/pay/{id}', [PaymentController::class, 'pay'])->name('pay');
 
 Route::get('/dashboard', function () {
     return view('dashboard'); 
@@ -129,59 +141,39 @@ Route::get('/dashboard', function () {
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
     Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
+    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+    Route::get('/admin/users', [AdminDashboardController::class, 'users'])->name('admin.users');
 });
 
-Route::get('login/google', [SocialController::class, 'redirectToGoogle'])
-    ->name('login.google'); 
+Route::get('login/google', [SocialController::class, 'redirectToGoogle'])->name('login.google'); 
+Route::get('login/google/callback', [SocialController::class, 'handleGoogleCallback'])->name('login.google.callback');
 
-Route::get('login/google/callback', [SocialController::class, 'handleGoogleCallback'])
-    ->name('login.google.callback');
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
 
-Route::middleware(['admin'])->prefix('admin')->group(function () {
-    Route::get('dashboard', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('access-logs', [AdminAccessLogController::class, 'index'])->name('admin.access.logs');
-    Route::post('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
 
-    Route::get('/orders', function () {
-        return "Orders page";
-    })->name('admin.orders');
+    Route::get('/access-logs', [AdminAccessLogController::class, 'index'])->name('access.logs');
 
-    Route::get('/foods', function () {
-        return "Foods page";
-    })->name('admin.foods');
+    Route::resource('food', FoodController::class);
 
-    Route::get('/categories', function () {
-        return "Categories page";
-    })->name('admin.categories');
-
-    Route::get('/users', function () {
-        return "Users page";
-})->name('admin.users');
+    Route::get('/orders', fn() => "Orders page")->name('orders');
+    Route::get('/foods', fn() => "Foods page")->name('foods');
+    Route::get('/categories', fn() => "Categories page")->name('categories');
+    Route::get('/users', fn() => "Users page")->name('users');
 });
 
-// Temporary route to create an admin user
 Route::get('/create-admin-user', function () {
     $admin = User::create([
         'name' => 'Admin User',
         'email' => 'admin@foodwin.com',
         'password' => Hash::make('password123'),
-        'admin_id' => '12345', // The ID you will enter in the form
+        'admin_id' => '12345',
         'is_admin' => true,
     ]);
     return "Admin user created! Email: admin@foodwin.com, Password: password123, Admin ID: 12345";
-});
+});  
 
-Route::prefix('admin')->middleware(['auth','admin'])->group(function(){
-    Route::resource('food', \App\Http\Controllers\Admin\FoodController::class);
-});
-
-Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
-    
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
-
-    Route::prefix('foods')->name('foods.')->group(function () {
+Route::prefix('foods')->name('foods.')->group(function () {
         Route::get('/', [FoodController::class, 'index'])->name('index');
         Route::get('/create', [FoodController::class, 'create'])->name('create');
         Route::post('/', [FoodController::class, 'store'])->name('store');
@@ -189,4 +181,5 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
         Route::put('/{food}', [FoodController::class, 'update'])->name('update');
         Route::delete('/{food}', [FoodController::class, 'destroy'])->name('destroy');
     });
-});
+
+Route::get('/foods', [FoodController::class, 'index'])->name('food.index');

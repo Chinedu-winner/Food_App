@@ -1,12 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Food; 
 use Illuminate\Http\Request;
-
 class MealController extends Controller{
+
     public function index(){
-        $meals = Meal::all();
-        return view('meal', compact('meals'));
+            $foods = Food::with('category')
+                ->where('status', 'active')
+                ->get();
+                // dd($foods);
+                return view('meal', compact('foods'));
     }
+
+public function store(Request $request){
+    Food::create([
+        'name' => $request->name,
+        'category_id' => $request->category_id,
+        'price' => $request->price,
+        'description' => $request->description,
+        'status' => 'active'
+    ]);
+
+    return redirect()->route('meal.index')
+        ->with('success', 'Meal added successfully!');
+}
 }

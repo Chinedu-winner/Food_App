@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Meal;
+use App\Models\Food;
 use App\Models\Order;
 use Yabacon\Paystack;
 
 class PaymentController extends Controller{
     public function redirectToGateway($id){
-        $meal = Meal::findOrFail($id);
+        $food = Food::findOrFail($id);
 
         session([
-            'meal_name' => $meal->name,
-            'meal_price' => $meal->price,
+            'meal_name' => $food->name,
+            'meal_price' => $food->price,
             'meal_quantity' => 1,
         ]);
         session()->save();
@@ -22,7 +22,7 @@ class PaymentController extends Controller{
 
         try {
             $response = $paystack->transaction->initialize([
-                'amount' => $meal->price * 100, 
+                'amount' => $food->price * 100, 
                 'email' => auth()->user()->email,
                 'callback_url' => route('payment.callback'),
             ]);

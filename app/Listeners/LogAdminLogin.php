@@ -6,11 +6,16 @@ use App\Events\AdminLoginEvent;
 use App\Models\AdminAccessLog;
 
 class LogAdminLogin{
-    public function handle(AdminLoginEvent $event){
-        AdminAccessLog::create([
-            'admin_id' => $event->user->id,
-            'action' => 'Admin Logged In',
-            'ip_address' => request()->ip(),
-        ]);
+    public function handle(Login $event){
+        $user = $event->user;
+
+        // Only log admins
+        if ($user->is_admin) {
+            AdminAccessLog::create([
+                'admin_id' => $user->id,
+                'ip_address' => request()->ip(),
+                'device' => request()->header('User-Agent'),
+            ]);
+        }
     }
 }

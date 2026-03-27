@@ -6,59 +6,86 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Admin Dashboard - FoodWin</title>
 </head>
+
 <body class="flex h-screen bg-gray-100">
 
-    <aside class="w-64 bg-gray-800 text-white flex-shrink-0">
-        <div class="p-6 text-xl font-bold">FoodWin Admin</div>
-        <nav class="mt-6">
-            <ul>
-                <li class="mb-2"><a href="{{ route('admin.dashboard') }}" class="block px-6 py-2 hover:bg-gray-700">Dashboard</a></li>
-                <li class="mb-2"><a href="{{ route('admin.orders') }}" class="block px-6 py-2 hover:bg-gray-700">Orders</a></li>
-                <li class="menu-item relative group mb-2">
-                <span class="cursor-pointer block px-6 py-2 hover:bg-gray-700 font-bold">Food</span>
-            
-                <ul class="absolute left-full top-0 hidden group-hover:block bg-gray-800 text-white w-56 shadow-lg">
-                    <li>
-                        <a href="{{ route('admin.foods.index') }}" class="block px-4 py-2 hover:bg-gray-700">Food List</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('admin.foods.create') }}" class="block px-4 py-2 hover:bg-gray-700">Add Food</a>
-                    </li>
-            
-                    @if(isset($foods) && $foods->count())
-                        <li class="border-t border-gray-600 mt-1 mb-1"></li>
-                        @foreach($foods as $food)
-                            <li>
-                                <a href="{{ route('admin.foods.edit', $food->id) }}" class="block px-4 py-2 hover:bg-gray-700">{{ $food->name }}</a>
-                            </li>
-                        @endforeach
-                    @endif
-                </ul>
-            </li>         
-                <li class="mb-2"><a href="{{ route('admin.categories') }}" class="block px-6 py-2 hover:bg-gray-700">Categories</a></li>
-                <li class="mb-2"><a href="{{ route('admin.users') }}" class="block px-6 py-2 hover:bg-gray-700">Users</a></li>
-                <li class="mb-2">
-                    <a href="{{ route('admin.logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"  
-                        class="block px-6 py-2 hover:bg-gray-700">Logout</a>
-                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+    <aside class="w-64 bg-gray-900 text-white flex flex-col shadow-lg">
+
+        <div class="p-6 text-2xl font-extrabold border-b border-gray-700">FoodWin Admin</div>
+
+        <nav class="flex-1 mt-4">
+            <ul class="space-y-1">
+
+                <li>
+                    <a href="{{ route('admin.dashboard') }}" class="block px-6 py-3 hover:bg-gray-700 transition">Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.orders') }}" class="block px-6 py-3 hover:bg-gray-700 transition">Orders</a>
+                </li>
+
+                <li class="relative group">
+                    <span class="block px-6 py-3 font-semibold cursor-pointer hover:bg-gray-700 transition">Food</span>
+
+                    <ul class="hidden group-hover:block absolute left-full top-0 bg-gray-800 w-56 shadow-xl rounded-md overflow-hidden">
+                        
+                        <li>
+                            <a href="{{ route('admin.food.index') }}" class="block px-4 py-2 hover:bg-gray-700">Food List</a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('admin.food.create') }}" class="block px-4 py-2 hover:bg-gray-700">Add Food</a>
+                        </li>
+
+                        @if(isset($foods) && $foods->count())
+                            <li class="border-t border-gray-600 my-1"></li>
+
+                            @foreach($foods as $food)
+                                <li>
+                                    <a href="{{ route('admin.food.edit', $food->id) }}" class="block px-4 py-2 hover:bg-gray-700 text-sm">{{ $food->name }}</a>
+                                </li>
+                            @endforeach
+                        @endif
+
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.categories') }}" class="block px-6 py-3 hover:bg-gray-700 transition">Categories</a>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.users') }}" class="block px-6 py-3 hover:bg-gray-700 transition">Users</a>
+                </li>
+                <li class="mt-4 border-t border-gray-700 pt-2">
+                    <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"   class="block px-6 py-3 hover:bg-red-600 transition text-red-300">  Logout</a>
+
+                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="hidden">
                         @csrf
                     </form>
                 </li>
+
             </ul>
         </nav>
     </aside>
 
-    <div class="flex-1 p-6 overflow-auto">
+    <main class="flex-1 flex flex-col overflow-hidden">
 
-        <div class="mb-6 text-2xl font-bold">
-            @yield('page-title')
-        </div>
-        <div>
-            @yield('content')
-        </div>
-    </div>
+        <header class="bg-white shadow px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-gray-800">
+                @yield('page-title')
+            </h1>
+        </header>
+
+        <section class="flex-1 p-6 overflow-y-auto">
+            <div class="bg-white rounded-xl shadow p-6">
+                @yield('content')
+            </div>
+        </section>
+
+    </main>
 
     @stack('scripts')
+
 </body>
 </html>

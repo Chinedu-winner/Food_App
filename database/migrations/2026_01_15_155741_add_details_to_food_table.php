@@ -4,13 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
+return new class extends Migration{
+    public function up(): void{
         Schema::table('food', function (Blueprint $table) {
             $table->json('ingredients')->nullable();
             $table->integer('calories')->nullable();
@@ -23,11 +18,7 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
+    public function down(): void{
         Schema::table('food', function (Blueprint $table) {
             $table->dropColumn(['ingredients', 'calories', 'dietary_restrictions', 'preparation_time', 'is_vegetarian', 'is_vegan', 'is_gluten_free', 'rating']);
         });

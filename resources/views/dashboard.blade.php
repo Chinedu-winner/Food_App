@@ -116,8 +116,8 @@
     <h3 class="text-2xl font-bold mb-4">Hungry? Order Now!</h3>
     <p class="text-lg mb-6 opacity-90">Get delicious food delivered to your doorstep</p>
     <button class="bg-white text-red-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors shadow-md hover:shadow-lg transform hover:scale-105 transition-transform">
-      <a href="{{ route('meal') }}" class="block">🍕 Order Now</a>
-    </button>
+      <a href="{{ route('meal.index') }}" class="block">🍕 Order Now</a>
+    </button>xa
   </div>
 
 </div> 

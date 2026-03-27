@@ -13,10 +13,11 @@ use Illuminate\Support\Carbon;
 class Order extends Model{
     use HasFactory;
 
-    public const STATUS_PENDING = 'pending';
+    // Order statuses
+    public const STATUS_PENDING   = 'pending';
     public const STATUS_CONFIRMED = 'confirmed';
     public const STATUS_PREPARING = 'preparing';
-    public const STATUS_READY = 'ready';
+    public const STATUS_READY     = 'ready';
     public const STATUS_DELIVERED = 'delivered';
     public const STATUS_CANCELLED = 'cancelled';
 
@@ -24,26 +25,22 @@ class Order extends Model{
         'user_id',
         'total',
         'status',
-        'notes',    
+        'notes',
         'latitude',
         'longitude',
-        'name',
-        'food_name',
-        'quantity',
-        'price',
         'address',
         'phone',
     ];
 
     protected $casts = [
-        'total' => 'decimal:2',
-        'latitude' => 'decimal:7',
+        'total'     => 'decimal:2',
+        'latitude'  => 'decimal:7',
         'longitude' => 'decimal:7',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
+        'created_at'=> 'datetime',
+        'updated_at'=> 'datetime',
     ];
 
-    protected $appends = [];
+    // Relationships
     public function user(): BelongsTo{
         return $this->belongsTo(User::class);
     }
@@ -57,6 +54,8 @@ class Order extends Model{
             ->withPivot('quantity', 'price')
             ->withTimestamps();
     }
+
+    // Scopes
     public function scopeForUser(Builder $query, int $userId): Builder{
         return $query->where('user_id', $userId);
     }
@@ -69,10 +68,11 @@ class Order extends Model{
         return $query->orderByDesc('created_at');
     }
 
+    // Calculate total from items
     public function recalcTotal(): float{
         $total = $this->orderItems()->get()->reduce(function ($carry, OrderItem $item) {
             return $carry + ($item->price * $item->quantity);
-    }, 0);
+        }, 0);
 
         $this->total = round((float) $total, 2);
         $this->saveQuietly();
@@ -80,28 +80,29 @@ class Order extends Model{
         return $this->total;
     }
 
+    // Add an item to the order
     public function addItem(Food $food, int $quantity = 1, ?float $price = null): OrderItem{
-        $price = $price ?? $food->price; 
+        $price = $price ?? $food->price;
         $item = $this->orderItems()->create([
-            'food_id' => $food->id,
+            'food_id'  => $food->id,
             'quantity' => $quantity,
-            'price' => $price,
+            'price'    => $price,
         ]);
 
         $this->recalcTotal();
         return $item;
     }
 
-    public function markAs(string $status): self{
+    // Status helpers
+    public function markAs(string $status): self
+    {
         $this->status = $status;
         $this->save();
         return $this;
     }
 
     public function markAsDelivered(): self{
-        $this->status = self::STATUS_DELIVERED;
-        $this->save();
-        return $this;
+        return $this->markAs(self::STATUS_DELIVERED);
     }
 
     public function isDelivered(): bool{

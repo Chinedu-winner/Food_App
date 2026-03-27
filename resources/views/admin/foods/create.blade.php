@@ -11,11 +11,18 @@
     <input type="text" name="name" class="border p-2 w-full mb-4" required>
 
     <label class="block mb-2">Category</label>
-    <select name="category_id" class="border p-2 w-full mb-4">
-        @foreach($categories as $category)
-        <option value="{{ $category->id }}">{{ $category->name }}</option>
-        @endforeach
-    </select>
+   <select name="category_id" class="border p-2 w-full mb-4">
+    <option value="1">Jollof Rice</option>
+    <option value="2">Pounded Yam & Egusi Soup</option>
+    <option value="3">Fried Rice</option>
+    <option value="4">Moi Moi</option>
+    <option value="5">Efo Riro</option>
+    <option value="6">Suya</option>
+    <option value="7">Amala & Ewedu</option>
+    <option value="8">Yam Porridge</option>
+    <option value="9">Pepper Soup</option>
+    <option value="10">Akara</option>
+</select>
 
     <label class="block mb-2">Price</label>
     <input type="number" name="price" class="border p-2 w-full mb-4" step="0.01" required>
